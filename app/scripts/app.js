@@ -1,19 +1,20 @@
 'use strict';
+/* global app:true */
 
-angular
-  .module('todoApp', [
+var app = angular.module('todoApp', [
     'ngCookies',
     'ngResource',
     'ngSanitize',
     'ngRoute'
-  ])
-  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
-      })
-      .otherwise({
-        redirectTo: '/'
-      });
-  });
+  ]);
+
+app.config(function ($routeProvider) {
+  $routeProvider
+    .when('/', {
+      templateUrl: 'views/tasks.html',
+      controller: 'TasksController'
+    })
+    .otherwise({
+      redirectTo: '/'
+    });
+});
