@@ -1,0 +1,19 @@
+.table-wrapper {
+  width: 770px;
+  max-width: 100%;
+  float: left;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+table, td {
+  border: 1px solid #DDD;
+}
+
+thead {
+  background: #ccc;
+}
+
+.delete-task {
+  cursor: pointer;
+}

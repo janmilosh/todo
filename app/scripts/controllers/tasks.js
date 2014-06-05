@@ -1,25 +1,31 @@
 'use strict';
  
-app.controller('TasksController', function ($scope) {
-  $scope.tasks = [];
+app.controller('TasksController', function ($scope, Task) {
+  $scope.tasks = Task.all;
 
   $scope.task = {
-    name: '',
+    title: '',
     date: '',
     description: '',
     tags: []
   };
 
+
   $scope.createTask = function() {
     $scope.task.date = Date.now();
 
-    $scope.tasks.push($scope.task);
+    Task.create($scope.task).then(function() {
+      
+      $scope.task = {                 //resets the task to empty values
+        title: '',
+        date: '',
+        description: '',
+        tags: []
+      };
+    });
+  };
 
-    $scope.task = {                 //resets the task to empty values
-      name: '',
-      date: '',
-      description: '',
-      tags: []
-    };
+  $scope.deleteTask = function (taskId) {
+    Task.delete(taskId);
   };
 });

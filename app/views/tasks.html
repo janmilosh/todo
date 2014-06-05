@@ -3,18 +3,35 @@
     <div class="form-wrapper">
       <form name="inputform" novalidate>
         <div class="form-group">
-          <input type="text" class="form-control" ng-model="task.name" placeholder="Task" required>
+          <input type="text" class="form-control" ng-model="task.title" placeholder="Task" required>
           <textarea class="form-control" ng-model="task.description" placeholder="Description"></textarea>
           <input type="text" class="form-control" ng-model="task.tags" placeholder="Tags">
           <button type="submit" class="form-control" ng-click="createTask()" ng-disabled="inputform.$invalid">Add Task</button>
         </div>
       </form>
     </div>
+
+    <div class="table-wrapper">
+      <table class="table">
+        <thead>
+          <tr>
+            <td>Task</td>
+            <td>Description</td>
+            <td>Date</td>
+            <td>Tags</td>
+            <td>&nbsp;</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="(taskId, task) in tasks">
+            <td>{{ task.title }}</td>
+            <td>{{ task.description }}</td>
+            <td>{{ task.date }}</td>
+            <td>{{ task.tags }}</td>
+            <td class="text-center delete-task" ng-click="deleteTask(taskId)">x</td>
+          </tr>
+        </tbody>  
+      </table>
+    <div> 
   </div>
-    
 </div>
-  
-
-<h2>Task: {{ task }}</h2>
-
-<h2>Tasks: {{ tasks }}</h2>

@@ -5,8 +5,10 @@ var app = angular.module('todoApp', [
     'ngCookies',
     'ngResource',
     'ngSanitize',
-    'ngRoute'
-  ]);
+    'ngRoute',
+    'firebase'
+  ])
+  .constant('FIREBASE_URL', 'https://milosh-todo.firebaseio.com/');
 
 app.config(function ($routeProvider) {
   $routeProvider
