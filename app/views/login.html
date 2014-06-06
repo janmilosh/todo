@@ -7,6 +7,7 @@
         <form ng-submit="login()">
           <input type="email" ng-model="user.email" placeholder="Email" class="form-control"><br>
           <input type="password" ng-model="user.password" placeholder="Password" class="form-control"><br>
+          <p ng-show="error" class="text-danger">{{ error }}</p>
           <input type="submit" value="Log in" class="btn btn-primary" />
         </form>
 
