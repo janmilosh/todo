@@ -18,11 +18,15 @@ app.controller('AuthController', function($scope, $location, Auth) {
   };
 
   $scope.register = function() {
-    Auth.register($scope.user).then(function(authUser) {
-      console.log('Registered User:', authUser);
-      $location.path('/');
-    }, function(error) {
-      $scope.error = error.toString();
-    });
+    try {
+      Auth.register($scope.user).then(function(authUser) {
+        console.log('Registered User:', authUser);
+        $location.path('/login');
+      }, function(error) {
+        $scope.error = error.toString();
+      });
+    } catch(e) {
+      console.log(e);
+    }    
   };
 });

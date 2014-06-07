@@ -6,8 +6,13 @@ app.factory('Auth', function($firebaseSimpleLogin, FIREBASE_URL, $rootScope) {
     var auth = $firebaseSimpleLogin(ref);
  
     var Auth = {
-      register: function(user) {
-        return auth.$createUser(user.email, user.password);
+      register: function(user) {        
+        if(user.password === user.passwordConfirmation) {
+          $rootScope.passwordMissmatch = false;
+          return auth.$createUser(user.email, user.password);
+        } else {
+          $rootScope.passwordMissmatch = true;
+        }        
       },
       signedIn: function() {
         return auth.user !== null;
