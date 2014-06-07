@@ -13,7 +13,6 @@ app.controller('TasksController', function ($scope, Task) {
     tags: []
   };
 
-
   $scope.createTask = function() {
     $scope.task.date = Date.now();
 
