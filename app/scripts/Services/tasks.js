@@ -12,6 +12,9 @@ app.factory('Task', function ($firebase, FIREBASE_URL) {
     find: function (taskId) {
       return tasks.$child(taskId);
     },
+    update: function (taskId) {
+      return tasks.$save(taskId);
+    },
     delete: function (taskId) {
       return tasks.$remove(taskId);
     }

@@ -10,5 +10,10 @@
   margin-bottom: 8px;
 }
 
+form.ng-invalid button[type="submit"] {
+  cursor: not-allowed;
+}
 
-
+input[type="text"] {
+  width: 100%;
+}

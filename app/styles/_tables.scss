@@ -6,6 +6,15 @@
   padding-right: 15px;
 }
 
+.table > tbody > tr > td {
+  vertical-align: middle;
+  padding: 4px 6px;
+}
+
+table input[type="text"] {
+  border: none;
+}
+
 table, td {
   border: 1px solid #DDD;
 }
@@ -17,3 +26,4 @@ thead {
 .delete-task {
   cursor: pointer;
 }
+

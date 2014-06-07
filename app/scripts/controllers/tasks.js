@@ -1,6 +1,9 @@
 'use strict';
  
 app.controller('TasksController', function ($scope, Task) {
+  
+  $scope.now = Date.now();
+
   $scope.tasks = Task.all;
 
   $scope.task = {
@@ -24,6 +27,11 @@ app.controller('TasksController', function ($scope, Task) {
       };
     });
   };
+
+  $scope.updateTask = function(taskId) {
+
+    Task.update(taskId);
+  }
 
   $scope.deleteTask = function (taskId) {
     Task.delete(taskId);

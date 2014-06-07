@@ -2,6 +2,7 @@
   <div class="row">
   
     <div class="table-wrapper">
+    <form name="tableform">  
       <table class="table">
         <thead>
           <tr>
@@ -13,26 +14,37 @@
           </tr>
         </thead>
         <tbody>
+          
+          <tr>
+            
+              <td><input type="text" ng-model="task.title" required></td>
+              <td><input type="text" ng-model="task.description"></td>
+              <td>{{ now | date: 'mediumDate' }}</td>
+              <td><input type="text" ng-model="task.tags"></td>
+              <td class="text-center create" ><button type="submit" ng-click="createTask()" ng-disabled="tableform.$invalid">add</button></td>
+            
+          </tr>
           <tr ng-repeat="(taskId, task) in tasks">
-            <td>{{ task.title }}</td>
-            <td>{{ task.description }}</td>
-            <td>{{ task.date | date: 'mediumDate'}}</td>
-            <td>{{ task.tags }}</td>
+            <td><input type="text" ng-model="task.title" ng-blur="updateTask(taskId)"></td>
+            <td><input type="text" ng-model="task.description" ng-blur="updateTask(taskId)"></td>
+            <td>{{ task.date | date: 'mediumDate' }}</td>
+            <td><input type="text" ng-model="task.tags" ng-blur="updateTask(taskId)"></td>
             <td class="text-center delete-task" ng-click="deleteTask(taskId)">x</td>
           </tr>
         </tbody>  
       </table>
+    </form>
     </div>
 
     <div class="form-wrapper">
-      <form name="inputform" novalidate>
+      <ng-form name="inputform" novalidate>
         <div class="form-group">
           <input type="text" class="form-control" ng-model="task.title" placeholder="Task" required>
           <textarea class="form-control" ng-model="task.description" placeholder="Description"></textarea>
           <input type="text" class="form-control" ng-model="task.tags" placeholder="Tags">
           <button type="submit" class="form-control" ng-click="createTask()" ng-disabled="inputform.$invalid">Add Task</button>
         </div>
-      </form>
+      </ng-form>
     </div> 
   </div>
 </div>
