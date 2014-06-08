@@ -1,6 +1,5 @@
 .table-wrapper {
-  width: 770px;
-  max-width: 100%;
+  width: 100%;
   float: left;
   padding-left: 15px;
   padding-right: 15px;
@@ -11,7 +10,8 @@
   padding: 4px 6px;
 }
 
-table input[type="text"] {
+table input[type="text"],
+table textarea {
   border: none;
 }
 

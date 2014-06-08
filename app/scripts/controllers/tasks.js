@@ -10,7 +10,7 @@ app.controller('TasksController', function ($scope, Task) {
     title: '',
     date: '',
     description: '',
-    tags: []
+    lists: []
   };
 
   $scope.createTask = function() {
@@ -22,7 +22,7 @@ app.controller('TasksController', function ($scope, Task) {
         title: '',
         date: '',
         description: '',
-        tags: []
+        lists: []
       };
     });
   };
