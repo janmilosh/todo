@@ -24,6 +24,10 @@ app.config(function ($routeProvider) {
       templateUrl: 'views/login.html',
       controller: 'AuthController'
     })
+    .when('/users/:username', {
+      templateUrl: 'views/tasks.html',
+      controller: 'TasksController'
+    })
     .otherwise({
       redirectTo: '/'
     });

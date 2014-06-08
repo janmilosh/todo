@@ -1,8 +1,13 @@
 'use strict';
  
-app.controller('TasksController', function ($scope, Task) {
+app.controller('TasksController', function ($scope, Task, $timeout) {
   
   $scope.now = Date.now();
+  var updateTime = function() {
+    $scope.now = Date.now();
+    $timeout(updateTime, 60000);
+  };
+  updateTime();
 
   $scope.tasks = Task.all;
 

@@ -21,7 +21,7 @@
               <td><input type="text" ng-model="task.lists"></td>
               <td class="text-center create" ><button type="submit" ng-click="createTask()" ng-disabled="tableform.$invalid">add</button></td>
             </tr>
-            <tr ng-repeat="(taskId, task) in tasks">
+            <tr ng-repeat="(taskId, task) in tasks | orderByPriority | orderBy:'date'">
               <td><input type="text" ng-model="task.title" ng-blur="updateTask(taskId)"></td>
               <td><input type="text" ng-model="task.description" ng-blur="updateTask(taskId)"></td>
               <td>{{ task.date | date: 'mediumDate' }}</td>
