@@ -18,9 +18,9 @@ app.factory('Auth', function($firebaseSimpleLogin, FIREBASE_URL, $rootScope) {
       return auth.user !== null;
     },
     login: function (user) {
-      return auth.$login('password', user);
+      return auth.$login('password', { email: user.email, password: user.password });
     },
-    logout: function () {
+    logout: function() {
       auth.$logout();
     },
     findByUsername: function (username) {

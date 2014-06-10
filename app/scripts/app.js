@@ -14,19 +14,15 @@ app.config(function ($routeProvider) {
   $routeProvider
     .when('/', {
       templateUrl: 'views/tasks.html',
-      controller: 'TasksController'
+      controller: 'TasksCtrl'
     })
     .when('/register', {
       templateUrl: 'views/register.html',
-      controller: 'AuthController'
+      controller: 'AuthCtrl'
     })
     .when('/login', {
       templateUrl: 'views/login.html',
-      controller: 'AuthController'
-    })
-    .when('/users/:username', {
-      templateUrl: 'views/tasks.html',
-      controller: 'TasksController'
+      controller: 'AuthCtrl'
     })
     .otherwise({
       redirectTo: '/'

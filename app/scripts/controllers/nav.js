@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('NavController', function($rootScope, $scope, $location, Auth, User) {
+app.controller('NavCtrl', function($rootScope, $scope, $location, Auth, User) {
 
   if (User.signedIn()) {  //This may not be needed later,
     User.getCurrent();    //but for now brings in the user to the header,

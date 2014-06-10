@@ -34,14 +34,14 @@ app.factory('User', function ($firebase, FIREBASE_URL, Auth, $rootScope) {
     $rootScope.currentUser = User.findByUsername(username);
   }
 
-  $rootScope.$on('$firebaseSimpleLogin:login', function(e, authUser) {
-    var query = $firebase(ref.startAt(authUser.uid).endAt(authUser.uid));
+  // $rootScope.$on('$firebaseSimpleLogin:login', function(e, authUser) {
+  //   var query = $firebase(ref.startAt(authUser.uid).endAt(authUser.uid));
    
-    query.$on('loaded', function() {
-      setCurrentUser(query.$getIndex()[0]);
-      console.log('loaded', $rootScope.currentUser);
-    });
-  });
+  //   query.$on('loaded', function() {
+  //     setCurrentUser(query.$getIndex()[0]);
+  //     console.log('loaded', $rootScope.currentUser);
+  //   });
+  // });
 
   $rootScope.$on('$firebaseSimpleLogin:logout', function() {
     delete $rootScope.currentUser;
