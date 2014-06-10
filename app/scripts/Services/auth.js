@@ -14,25 +14,28 @@ app.factory('Auth', function($firebaseSimpleLogin, FIREBASE_URL, $rootScope) {
         $rootScope.passwordMissmatch = true;
       }        
     },
-    signedIn: function() {
-      return auth.user !== null;
-    },
     login: function (user) {
       return auth.$login('password', { email: user.email, password: user.password });
     },
     logout: function() {
       auth.$logout();
     },
-    findByUsername: function (username) {
-      if (username) {
-        return users.$child(username);
-      }
+    getCurrentUser: function() {
+      return auth.$getCurrentUser();
     }
   };
 
-  $rootScope.signedIn = function () {
-    return Auth.signedIn();
-  };
+  $rootScope.signedIn = false;
+
+  $rootScope.$on("$firebaseSimpleLogin:login", function(e, user) {
+    console.log("User " + user.email + " successfully logged in!");
+    $rootScope.signedIn = true;
+  });
+
+  $rootScope.$on("$firebaseSimpleLogin:logout", function() {
+    console.log("You have successfully logged out!");
+    $rootScope.signedIn = false;
+  });
 
   return Auth;
 });

@@ -2,11 +2,6 @@
 
 app.controller('NavCtrl', function($rootScope, $scope, $location, Auth, User) {
 
-  if (User.signedIn()) {  //This may not be needed later,
-    User.getCurrent();    //but for now brings in the user to the header,
-  }                       //even on page refresh (puts current user on $rootScope again)
-
-
   $scope.logout = function() {    
     Auth.logout();         
   };
