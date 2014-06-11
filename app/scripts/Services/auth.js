@@ -1,18 +1,19 @@
 'use strict';
  
-app.factory('Auth', function($firebaseSimpleLogin, FIREBASE_URL, $rootScope) {
+app.factory('Auth', function($firebaseSimpleLogin, FIREBASE_URL, $rootScope, $location) {
   var ref = new Firebase(FIREBASE_URL);
 
   var auth = $firebaseSimpleLogin(ref);
 
+  $rootScope.passwordMissmatch = false;
+
   var Auth = {
-    passwordMissmatch: false,
     register: function(user) {        
       if(user.password === user.passwordConfirmation) {
-        Auth.passwordMissmatch = false;
+        $rootScope.passwordMissmatch = false;
         return auth.$createUser(user.email, user.password);
       } else {
-        Auth.passwordMissmatch = true;
+        $rootScope.passwordMissmatch = true;
       }        
     },
     login: function (user) {
@@ -20,23 +21,20 @@ app.factory('Auth', function($firebaseSimpleLogin, FIREBASE_URL, $rootScope) {
     },
     logout: function() {
       auth.$logout();
-    },
-    getCurrentUser: function() {
-      auth.$getCurrentUser().then(function(authUser) {
-        console.log('Current user in the factory functin', authUser);
-        return authUser;
-      })
     }
   };
 
   $rootScope.$on("$firebaseSimpleLogin:login", function(e, user) {
+    $rootScope.currentUser = user;
     console.log("User " + user.email + " successfully logged in!");
     $rootScope.signedIn = true;
   });
 
   $rootScope.$on("$firebaseSimpleLogin:logout", function() {
+    delete $rootScope.currentUser;
     console.log("Logout event fired.");
     $rootScope.signedIn = false;
+    $location.path('/login');
   });
 
   return Auth;
