@@ -21,17 +21,17 @@ app.factory('Auth', function($firebaseSimpleLogin, FIREBASE_URL, $rootScope, $lo
     },
     logout: function() {
       auth.$logout();
+    },
+    getCurrentUser: function() {
+      return auth.$getCurrentUser();
     }
   };
 
   $rootScope.$on("$firebaseSimpleLogin:login", function(e, user) {
-    $rootScope.currentUser = user;
-    console.log("User " + user.email + " successfully logged in!");
     $rootScope.signedIn = true;
   });
 
   $rootScope.$on("$firebaseSimpleLogin:logout", function() {
-    delete $rootScope.currentUser;
     console.log("Logout event fired.");
     $rootScope.signedIn = false;
     $location.path('/login');

@@ -2,11 +2,14 @@
  
 app.controller('AuthCtrl', function($scope, $rootScope, $location, Auth) {
 
+  Auth.getCurrentUser().then(function(authUser) {
+    $scope.currentUser = authUser;
+  });
+
   $scope.login = function() {
     $scope.error = null;
     Auth.login($scope.user).then(function(authUser) {
-      $rootScope.currentUser = authUser;
-      console.log('current user: ', $rootScope.currentUser);
+      $scope.currentUser = authUser;
       $scope.resetForm();
       $location.path('/');
     }, function(error) {
@@ -19,7 +22,7 @@ app.controller('AuthCtrl', function($scope, $rootScope, $location, Auth) {
     console.log('passwordMissmatch: ',$rootScope.passwordMissmatch)
     Auth.register($scope.user).then(function(authUser) {
       Auth.login($scope.user);
-      $rootScope.currentUser = authUser;
+      $scope.currentUser = authUser;
       $scope.resetForm();
       $location.path('/');
     }, function(error) {

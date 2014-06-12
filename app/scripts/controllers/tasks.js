@@ -1,6 +1,6 @@
 'use strict';
  
-app.controller('TasksCtrl', function ($scope, Task, $timeout) {
+app.controller('TasksCtrl', function ($scope, Task, Auth, $timeout) {
   
   $scope.now = Date.now();
   var updateTime = function() {
@@ -8,6 +8,10 @@ app.controller('TasksCtrl', function ($scope, Task, $timeout) {
     $timeout(updateTime, 60000);
   };
   updateTime();
+
+  Auth.getCurrentUser().then(function(authUser) {
+    $scope.currentUser = authUser;
+  });
 
   $scope.tasks = Task.all;
 
