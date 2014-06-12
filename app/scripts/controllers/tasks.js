@@ -37,9 +37,8 @@ app.controller('TasksCtrl', function ($scope, Task, Auth, $timeout) {
   };
 
   $scope.updateTask = function(taskId) {
-
     Task.update(taskId);
-  }
+  };
 
   $scope.deleteTask = function (taskId) {
     Task.delete(taskId);

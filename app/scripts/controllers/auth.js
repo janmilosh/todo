@@ -19,7 +19,6 @@ app.controller('AuthCtrl', function($scope, $rootScope, $location, Auth) {
 
   $scope.register = function() {
     $scope.error = null;
-    console.log('passwordMissmatch: ',$rootScope.passwordMissmatch)
     Auth.register($scope.user).then(function(authUser) {
       Auth.login($scope.user);
       $scope.currentUser = authUser;
@@ -27,7 +26,7 @@ app.controller('AuthCtrl', function($scope, $rootScope, $location, Auth) {
       $location.path('/');
     }, function(error) {
       $scope.error = error.toString();
-    });  
+    });
   };
 
   $scope.resetForm = function() {

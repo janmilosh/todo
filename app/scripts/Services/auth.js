@@ -8,13 +8,13 @@ app.factory('Auth', function($firebaseSimpleLogin, FIREBASE_URL, $rootScope, $lo
   $rootScope.passwordMissmatch = false;
 
   var Auth = {
-    register: function(user) {        
+    register: function(user) {
       if(user.password === user.passwordConfirmation) {
         $rootScope.passwordMissmatch = false;
         return auth.$createUser(user.email, user.password);
       } else {
         $rootScope.passwordMissmatch = true;
-      }        
+      }
     },
     login: function (user) {
       return auth.$login('password', { email: user.email, password: user.password, rememberMe: true });
@@ -27,12 +27,12 @@ app.factory('Auth', function($firebaseSimpleLogin, FIREBASE_URL, $rootScope, $lo
     }
   };
 
-  $rootScope.$on("$firebaseSimpleLogin:login", function(e, user) {
+  $rootScope.$on('$firebaseSimpleLogin:login', function() {
     $rootScope.signedIn = true;
   });
 
-  $rootScope.$on("$firebaseSimpleLogin:logout", function() {
-    console.log("Logout event fired.");
+  $rootScope.$on('$firebaseSimpleLogin:logout', function() {
+    console.log('Logout event fired.');
     $rootScope.signedIn = false;
     $location.path('/login');
   });
