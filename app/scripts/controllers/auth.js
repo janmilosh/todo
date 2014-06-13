@@ -5,7 +5,7 @@ app.controller('AuthCtrl', function($scope, $rootScope, $location, Auth, User) {
 
   $scope.login = function() {
     $scope.error = null;
-    Auth.login($scope.user).then(function() {
+    Auth.login($scope.user).then(function(authUser) {
       $scope.resetForm();
       $location.path('/');
     }, function(error) {
@@ -17,9 +17,8 @@ app.controller('AuthCtrl', function($scope, $rootScope, $location, Auth, User) {
     $scope.error = null;
     Auth.register($scope.user).then(function(authUser) {
       User.create(authUser);
-      Auth.login($scope.user);
+      $scope.login($scope.user);
       $scope.resetForm();
-      $location.path('/');
     }, function(error) {
       $scope.error = error.toString();
     });

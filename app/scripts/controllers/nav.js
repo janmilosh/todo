@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('NavCtrl', function($rootScope, $scope, $location, Auth) {
+app.controller('NavCtrl', function($scope, $rootScope, $location, Auth) {
 
   $rootScope.$on('$firebaseSimpleLogin:login', function(e, user) {
     $scope.currentUser = user;

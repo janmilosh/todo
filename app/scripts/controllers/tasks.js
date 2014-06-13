@@ -1,6 +1,6 @@
 'use strict';
  
-app.controller('TasksCtrl', function ($scope, Task, Auth, $timeout) {
+app.controller('TasksCtrl', function ($scope, $rootScope, Task, Auth, $timeout) {
   
   $scope.now = Date.now();
   var updateTime = function() {
@@ -9,9 +9,14 @@ app.controller('TasksCtrl', function ($scope, Task, Auth, $timeout) {
   };
   updateTime();
 
-  Auth.getCurrentUser().then(function(authUser) {
-    $scope.currentUser = authUser;
+  $rootScope.$on('$firebaseSimpleLogin:login', function(e, user) {
+    $rootScope.currentUser = user;
   });
+
+  // Auth.getCurrentUser().then(function(authUser) {
+  //   $scope.currentUser = authUser;
+  //   console.log('authUser: ', authUser);
+  // });
 
   $scope.tasks = Task.all;
 
@@ -25,15 +30,14 @@ app.controller('TasksCtrl', function ($scope, Task, Auth, $timeout) {
   $scope.createTask = function() {
     $scope.task.date = Date.now();
 
-    Task.create($scope.task).then(function() {
-      
+    Task.create($scope.task, function() {
       $scope.task = {                 //resets the task to empty values
         title: '',
         date: '',
         description: '',
         lists: []
       };
-    });
+    });         
   };
 
   $scope.updateTask = function(taskId) {
