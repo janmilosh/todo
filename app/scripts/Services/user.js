@@ -5,6 +5,7 @@ app.factory('User', function($firebase, FIREBASE_URL, Auth, $rootScope) {
   var users = $firebase(ref);
 
   var User = {
+    all: users,
     create: function(newAuthUser) { 
       users.$add({
         id: newAuthUser.id,
@@ -13,7 +14,7 @@ app.factory('User', function($firebase, FIREBASE_URL, Auth, $rootScope) {
       });
     },
     getCurrentUserRef: function() {
-      return users.$child(40).name();
+      return users.$child('40');
     }
   };
 

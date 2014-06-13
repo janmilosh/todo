@@ -11,9 +11,11 @@ app.factory('Task', function ($firebase, FIREBASE_URL, $rootScope, User) {
         
         return tasks.$add(task).then(function(ref) {
           var taskId = ref.name();
-          var currentUserRef = User.getCurrentUserRef();
-          currentUserRef.$child('tasks').$child(taskId).$set(taskId);
-     
+          //var currentUserRef = User.getCurrentUserRef();
+          console.log('Created task with this taskId: ', taskId);
+          console.log('The UserId is: ', $rootScope.currentUser.id);
+
+          console.log('All users: ', User.getCurrentUserRef());
           return taskId;
         });
       }

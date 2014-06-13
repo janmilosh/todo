@@ -32,7 +32,7 @@ app.factory('Auth', function($firebaseSimpleLogin, FIREBASE_URL, $rootScope, $lo
   $rootScope.$on('$firebaseSimpleLogin:logout', function() {
     console.log('Logout event fired.');
     $rootScope.signedIn = false;
-    $rootScope.currentUser = null;
+    delete $rootScope.currentUser;
     $location.path('/login');
   });
 
