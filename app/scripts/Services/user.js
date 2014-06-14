@@ -13,11 +13,14 @@ app.factory('User', function($firebase, FIREBASE_URL, Auth, $rootScope) {
         md5_hash: newAuthUser.md5_hash
       });
     },
-    getCurrentUserRef: function() {
-      return users.$child('40');
+    addTaskToUser: function(currentUser, taskId) {
+      var currentUserId = currentUser.id;
+      console.log('currentUserId: ', currentUserId);
+      var user = users.$child(currentUserId);
+      console.log('user: ', user);
+      user.$child('tasks').$child('taskId').$set(taskId);
     }
   };
 
   return User;
-
 });

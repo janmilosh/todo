@@ -1,6 +1,6 @@
 'use strict';
  
-app.controller('TasksCtrl', function ($scope, $rootScope, Task, Auth, $timeout) {
+app.controller('TasksCtrl', function ($scope, $rootScope, Task, Auth, User,$timeout) {
   
   $scope.now = Date.now();
   var updateTime = function() {
@@ -30,7 +30,10 @@ app.controller('TasksCtrl', function ($scope, $rootScope, Task, Auth, $timeout) 
   $scope.createTask = function() {
     $scope.task.date = Date.now();
 
-    Task.create($scope.task, function() {
+    Task.create($scope.task).then(function(ref) {
+      var taskId = ref.name();
+      User.addTaskToUser($rootScope.currentUser, taskId);
+      
       $scope.task = {                 //resets the task to empty values
         title: '',
         date: '',

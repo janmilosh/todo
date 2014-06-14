@@ -8,16 +8,7 @@ app.factory('Task', function ($firebase, FIREBASE_URL, $rootScope, User) {
     all: tasks,
     create: function(task) {
       if ($rootScope.signedIn) {
-        
-        return tasks.$add(task).then(function(ref) {
-          var taskId = ref.name();
-          //var currentUserRef = User.getCurrentUserRef();
-          console.log('Created task with this taskId: ', taskId);
-          console.log('The UserId is: ', $rootScope.currentUser.id);
-
-          console.log('All users: ', User.getCurrentUserRef());
-          return taskId;
-        });
+        return tasks.$add(task);
       }
     },
     find: function(taskId) {
