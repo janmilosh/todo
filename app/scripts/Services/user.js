@@ -1,49 +1,26 @@
 'use strict';
 
-app.factory('User', function($firebase, FIREBASE_URL, Auth, $rootScope) {
+app.factory('User', function($firebase, FIREBASE_URL) {
   var ref = new Firebase(FIREBASE_URL + 'users');
   var users = $firebase(ref);
 
   var User = {
-    create: function(authUser, username) {
-      users[username] = {
-        md5_hash: authUser.md5_hash,
-        username: username,
-        $priority: authUser.uid
+    create: function(newAuthUser) {
+      users[newAuthUser.id] = {
+        email: newAuthUser.email,
+        md5_hash: newAuthUser.md5_hash
       };
-
-      users.$save(username).then(function() {
-        setCurrentUser(username);
-      });
+      users.$save();
     },
-    findByUsername: function(username) {
-      if (username) {
-        return users.$child(username);
-      }
+    addTaskToUser: function(userRef, taskId) {
+      var user = users.$child(userRef);
+      user.$child('tasks').$add(taskId);
     },
-    getCurrent: function () {
-      return $rootScope.currentUser;
-    },
-    signedIn: function () {
-      return $rootScope.currentUser !== undefined;
+    removeTaskFromUser: function(userRef, taskId) {
+      var user = users.child(userRef);
+      user.$child('tasks').$remove(taskId);
     }
   };
 
-  function setCurrentUser(username) {
-    $rootScope.currentUser = User.findByUsername(username);
-  }
-
-  $rootScope.$on('$firebaseSimpleLogin:login', function(e, authUser) {
-    var query = $firebase(ref.startAt(authUser.uid).endAt(authUser.uid));
-   
-    query.$on('loaded', function() {
-      setCurrentUser(query.$getIndex()[0]);
-    });
-  });
-
-  $rootScope.$on('$firebaseSimpleLogin:logout', function() {
-    delete $rootScope.currentUser;
-  });
- 
   return User;
 });
