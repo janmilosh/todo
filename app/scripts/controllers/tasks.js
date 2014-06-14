@@ -9,16 +9,7 @@ app.controller('TasksCtrl', function ($scope, $rootScope, Task, Auth, User,$time
   };
   updateTime();
 
-  $rootScope.$on('$firebaseSimpleLogin:login', function(e, user) {
-    $rootScope.currentUser = user;
-  });
-
-  // Auth.getCurrentUser().then(function(authUser) {
-  //   $scope.currentUser = authUser;
-  //   console.log('authUser: ', authUser);
-  // });
-
-  $scope.tasks = Task.all;
+  $scope.tasks = Task.all();
 
   $scope.task = {
     title: '',
@@ -40,7 +31,7 @@ app.controller('TasksCtrl', function ($scope, $rootScope, Task, Auth, User,$time
         description: '',
         lists: []
       };
-    });         
+    });
   };
 
   $scope.updateTask = function(taskId) {

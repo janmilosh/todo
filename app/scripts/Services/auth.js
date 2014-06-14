@@ -16,6 +16,9 @@ app.factory('Auth', function($firebaseSimpleLogin, FIREBASE_URL, $rootScope, $lo
         $rootScope.passwordMissmatch = true;
       }
     },
+    signedIn: function() {
+      return auth.user !== null;
+    },
     login: function (user) {
       return auth.$login('password', { email: user.email, password: user.password, rememberMe: true });
     },
@@ -30,11 +33,14 @@ app.factory('Auth', function($firebaseSimpleLogin, FIREBASE_URL, $rootScope, $lo
   });
 
   $rootScope.$on('$firebaseSimpleLogin:logout', function() {
-    console.log('Logout event fired.');
     $rootScope.signedIn = false;
     delete $rootScope.currentUser;
     $location.path('/login');
   });
+
+  $rootScope.signedIn = function() {
+    return Auth.signedIn();
+  };
 
   return Auth;
 });

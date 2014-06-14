@@ -5,10 +5,29 @@ app.factory('Task', function ($firebase, FIREBASE_URL, $rootScope, User) {
   var tasks = $firebase(ref);
 
   var Task = {
-    all: tasks,
+    all: function() {
+      if (User.signedIn()) {
+        var user = User.getCurrent();
+
+        console.log('user: ', user);
+        
+        return tasks + '/' + user.username;
+      }
+    },
     create: function(task) {
-      if ($rootScope.signedIn) {
-        return tasks.$add(task);
+      if (User.signedIn) {
+        var user = User.getCurrent();
+
+        task.owner = user.username;
+
+
+        return tasks.$add(task).then(function(ref) {
+          var taskId = ref.name();
+          
+          user.$child('tasks').$child(taskId).$set(taskId);
+          
+          return taskId;
+        });
       }
     },
     find: function(taskId) {
@@ -18,10 +37,10 @@ app.factory('Task', function ($firebase, FIREBASE_URL, $rootScope, User) {
       return tasks.$save(taskId);
     },
     delete: function(taskId) {
-      if ($rootScope.signedIn) {
-        var task = Task.find(taskId);    
+      if (User.signedIn) {
         tasks.$remove(taskId).then(function() {
-          currentUserRef.$child('tasks').$remove(taskId);
+          var user = User.getCurrent();
+          user.$child('tasks').$remove(taskId);
         });
       }
     }
