@@ -3,14 +3,13 @@
 app.controller('TasksCtrl', function ($scope, $rootScope, $timeout, $location, Task, Auth, User) {
   
   $rootScope.$on('$firebaseSimpleLogin:login', function(e, user) {
-    console.log('Login event noticed by TasksCtrl.');
     $rootScope.currentUser = user;
     $scope.user = User.getCurrentUser($rootScope.currentUser.id);
+    $rootScope.signedIn = true;
     $scope.populateTasks();
   });
 
   $rootScope.$on('$firebaseSimpleLogin:logout', function() {
-    console.log('Logout event fired noticed by TasksCtrl.');
     $rootScope.signedIn = false;
     delete $rootScope.currentUser;
     $location.path('/login');
@@ -31,16 +30,28 @@ app.controller('TasksCtrl', function ($scope, $rootScope, $timeout, $location, T
     user: ''
   };
 
+  $scope.$on('$routeChangeSuccess', function() {
+    if ($rootScope.signedIn) {
+      $scope.populateTasks();
+    } else {
+      console.log('tried to populate tasks, but not signed in yet.');
+    }
+  });
 
   $scope.populateTasks = function() {
     $scope.userTasks = User.getUserTasks($rootScope.currentUser.id);
-    var index = $scope.userTasks.$getIndex();
+    $scope.userTasks.$on('loaded', function() {
 
-    angular.forEach($scope.userTasks, function(taskId, index) {
-      console.log('index: ', index);
-      console.log('taskId', taskId);
-      $scope.tasks[index] = Task.find(taskId);
-    })
+      $scope.tasks = {};
+      var counter = 0;
+      
+      angular.forEach($scope.userTasks, function(value, taskId) {
+        if (value === true) {
+          $scope.tasks[counter] = Task.find(taskId);
+          counter += 1;
+        }
+      });
+    });
   };
 
   $scope.createTask = function() {
@@ -59,16 +70,17 @@ app.controller('TasksCtrl', function ($scope, $rootScope, $timeout, $location, T
           lists: [],
           user: ''
         };
+
+        $scope.populateTasks();
       });
     } else {
       console.log('There is no user signed in right now.');
     }
   };
-
-
+  
   $scope.updateTask = function(taskId) {
     if ($rootScope.signedIn) {
-      Task.update(taskId); 
+      Task.update(taskId);
     } else {
       console.log('There is no user signed in right now.');
     }
@@ -79,6 +91,7 @@ app.controller('TasksCtrl', function ($scope, $rootScope, $timeout, $location, T
       var userRef = $rootScope.currentUser.id;
       Task.delete(taskId);
       User.deleteTaskFromUser(userRef, taskId);
+      $scope.populateTasks();
     } else {
       console.log('There is no user signed in right now.');
     }

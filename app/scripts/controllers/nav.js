@@ -3,13 +3,11 @@
 app.controller('NavCtrl', function($scope, $rootScope, $location, Auth) {
 
   $rootScope.$on('$firebaseSimpleLogin:login', function(e, user) {
-    console.log('Login event noticed by NavCtrl.');
-    $rootScope.signedIn = true;
     $rootScope.currentUser = user;
+    $rootScope.signedIn = true;
   });
 
   $rootScope.$on('$firebaseSimpleLogin:logout', function() {
-    console.log('Logout event noticed by NavCtrl.');
     $rootScope.signedIn = false;
     $rootScope.currentUser = null;
     $location.path('/login');
@@ -17,7 +15,7 @@ app.controller('NavCtrl', function($scope, $rootScope, $location, Auth) {
 
   $scope.logout = function() {
     Auth.logout();
-    $scope.currentUser = null;
+    $rootScope.currentUser = null;
     $location.path('/login');
   };
 

@@ -1,6 +1,6 @@
 'use strict';
 
-app.factory('Task', function ($firebase, FIREBASE_URL, $rootScope, User) {
+app.factory('Task', function ($firebase, FIREBASE_URL) {
   var ref = new Firebase(FIREBASE_URL + 'tasks');
   var tasks = $firebase(ref);
 
@@ -21,8 +21,3 @@ app.factory('Task', function ($firebase, FIREBASE_URL, $rootScope, User) {
  
   return Task;
 });
-
-// var keys = $scope.items.$getIndex();
-// keys.forEach(function(key, i) {
-//   console.log(i, $scope.items[key]); // Prints items in order they appear in Firebase.
-// });
