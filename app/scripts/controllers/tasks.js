@@ -27,25 +27,22 @@ app.controller('TasksCtrl', function ($scope, $rootScope, $timeout, $location, T
     title: '',
     date: '',
     description: '',
-    lists: [],
-    user: ''
+    lists: []
   };
 
   $scope.createTask = function() {
     if ($rootScope.signedIn) {
       $scope.task.date = Date.now();
-      $scope.task.user = $rootScope.currentUser.email;
-      var userRef = $rootScope.currentUser.id;
+      
       Task.create($scope.task).then(function(ref) {
-        $scope.taskId = ref.name();
-        User.addTaskToUser(userRef, $scope.taskId);
+        // $scope.taskId = ref.name();
+        // User.addTaskToUser(userRef, $scope.taskId);
         
         $scope.task = {                 //resets the task to empty values
           title: '',
           date: '',
           description: '',
-          lists: [],
-          user: ''
+          lists: []
         };
       });
     } else {
@@ -58,15 +55,10 @@ app.controller('TasksCtrl', function ($scope, $rootScope, $timeout, $location, T
     Task.update(taskId);
   };
 
-  $scope.deleteTask = function () {
+  $scope.deleteTask = function (taskId) {
     if ($rootScope.signedIn) {
-      //need to get the taskId somehow
-      //Put taskId on task object for testing
-      //Might be better way to get to task object
-      //Check egghead.io tutorial on this
-      var userRef = $rootScope.currentUser.id;
+  
       Task.delete(taskId);
-      User.removeTaskFromUser(userRef, taskId);
     } else {
       console.log('There is no user signed in right now.');
     }
