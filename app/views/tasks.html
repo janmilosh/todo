@@ -2,7 +2,7 @@
   <div class="row">
   
     <div class="table-wrapper">
-      <h3>Hello {{ currentUser.email }}!!!</h3>
+      <h3 ng-show="signedIn">Logged in as: {{ currentUser.email }}</h3>
       <form name="tableform">  
         <table class="table">
           <thead>
@@ -23,10 +23,10 @@
               <td class="text-center create" ><button type="submit" ng-click="createTask()" ng-disabled="tableform.$invalid">add</button></td>
             </tr>
             <tr ng-repeat="task in tasks | orderByPriority | orderBy:'date'">
-              <td><input type="text" ng-model="task.title" ng-blur="updateTask(task.$id)"></td>
-              <td><input type="text" ng-model="task.description" ng-blur="updateTask(task.$id)"></td>
+              <td><input type="text" ng-model="task.title" ng-blur="updateTitle(task.$id)"></td>
+              <td><input type="text" ng-model="task.description" ng-blur="updateDescription(task.$id)"></td>
               <td>{{ task.date | date: 'mediumDate' }}</td>
-              <td><input type="text" ng-model="task.lists" ng-blur="updateTask(task.$id)"></td>
+              <td><input type="text" ng-model="task.lists" ng-blur="updateLists(task.$id)"></td>
               <td class="text-center delete-task" ng-click="deleteTask(task.$id)">x</td>
             </tr>
           </tbody>  

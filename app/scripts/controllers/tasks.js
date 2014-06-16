@@ -78,9 +78,28 @@ app.controller('TasksCtrl', function ($scope, $rootScope, $timeout, $location, T
     }
   };
   
-  $scope.updateTask = function(taskId) {
+  $scope.updateTitle = function(taskId) {
     if ($rootScope.signedIn) {
+      console.log('updating the title');
       Task.update(taskId);
+    } else {
+      console.log('There is no user signed in right now.');
+    }
+  };
+
+  $scope.updateDescription = function(taskId) {
+    if ($rootScope.signedIn) {
+      console.log('updating the description');
+      Task.update(taskId, 'description', $scope.description);
+    } else {
+      console.log('There is no user signed in right now.');
+    }
+  };
+
+  $scope.updateLists = function(taskId) {
+    if ($rootScope.signedIn) {
+      console.log('updating the description');
+      Task.update(taskId, 'lists', $scope.lists);
     } else {
       console.log('There is no user signed in right now.');
     }

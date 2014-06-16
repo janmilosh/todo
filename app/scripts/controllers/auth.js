@@ -5,10 +5,8 @@ app.controller('AuthCtrl', function($scope, $rootScope, $location, Auth, User) {
 
   $scope.login = function() {
     $scope.error = null;
-    Auth.login($scope.user).then(function(authUser) {
+    Auth.login($scope.user).then(function() {
       $scope.resetForm();
-      $rootScope.currentUser = authUser;
-      $rootScope.signedIn = true;
       $location.path('/');
     }, function(error) {
       $scope.error = error.toString();
