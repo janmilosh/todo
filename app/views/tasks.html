@@ -23,10 +23,10 @@
               <td class="text-center create" ><button type="submit" ng-click="createTask()" ng-disabled="tableform.$invalid">add</button></td>
             </tr>
             <tr ng-repeat="task in tasks | orderByPriority | orderBy:'date'">
-              <td><input type="text" ng-model="task.title" ng-blur="updateTitle(task.$id)"></td>
-              <td><input type="text" ng-model="task.description" ng-blur="updateDescription(task.$id)"></td>
+              <td><input type="text" ng-model="task.title" ng-blur="updateTask(task.$id, 'title', task.title)"></td>
+              <td><input type="text" ng-model="task.description" ng-blur="updateTask(task.$id, 'description', task.description)"></td>
               <td>{{ task.date | date: 'mediumDate' }}</td>
-              <td><input type="text" ng-model="task.lists" ng-blur="updateLists(task.$id)"></td>
+              <td><input type="text" ng-model="task.lists" ng-blur="updateTask(task.$id, 'lists', task.lists)"></td>
               <td class="text-center delete-task" ng-click="deleteTask(task.$id)">x</td>
             </tr>
           </tbody>  

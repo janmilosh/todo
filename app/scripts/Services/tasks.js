@@ -11,9 +11,8 @@ app.factory('Task', function ($firebase, FIREBASE_URL) {
     find: function(taskId) {
       return tasks.$child(taskId);
     },
-    update: function(taskId) {
-      console.log('The taskId in the task service: ', taskId);
-      tasks.$save(taskId);
+    update: function(taskId, key, value) {
+      tasks.$child(taskId).$child(key).$set(value);
     },
     delete: function(taskId) {
       tasks.$remove(taskId);

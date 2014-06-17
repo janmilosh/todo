@@ -2,6 +2,8 @@
  
 app.controller('TasksCtrl', function ($scope, $rootScope, $timeout, $location, Task, Auth, User) {
   
+  $scope.focusOnTitle = true;
+
   $rootScope.$on('$firebaseSimpleLogin:login', function(e, user) {
     $rootScope.currentUser = user;
     $scope.user = User.getCurrentUser($rootScope.currentUser.id);
@@ -72,34 +74,16 @@ app.controller('TasksCtrl', function ($scope, $rootScope, $timeout, $location, T
         };
 
         $scope.populateTasks();
+        $scope.focusOnTitle = true;
       });
     } else {
       console.log('There is no user signed in right now.');
     }
   };
   
-  $scope.updateTitle = function(taskId) {
+  $scope.updateTask = function(taskId, key, value) {
     if ($rootScope.signedIn) {
-      console.log('updating the title');
-      Task.update(taskId);
-    } else {
-      console.log('There is no user signed in right now.');
-    }
-  };
-
-  $scope.updateDescription = function(taskId) {
-    if ($rootScope.signedIn) {
-      console.log('updating the description');
-      Task.update(taskId, 'description', $scope.description);
-    } else {
-      console.log('There is no user signed in right now.');
-    }
-  };
-
-  $scope.updateLists = function(taskId) {
-    if ($rootScope.signedIn) {
-      console.log('updating the description');
-      Task.update(taskId, 'lists', $scope.lists);
+      Task.update(taskId, key, value);
     } else {
       console.log('There is no user signed in right now.');
     }
