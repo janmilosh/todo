@@ -36,7 +36,7 @@ app.controller('TasksCtrl', function ($scope, $rootScope, $timeout, $location, T
     if ($rootScope.signedIn) {
       $scope.populateTasks();
     } else {
-      console.log('tried to populate tasks, but not signed in yet.');
+      console.log('Waiting for firebase login event to occur.');
     }
   });
 
