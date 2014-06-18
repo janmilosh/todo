@@ -27,8 +27,7 @@ app.controller('TasksCtrl', function ($scope, $rootScope, $timeout, $location, T
   $scope.task = {
     title: '',
     date: '',
-    description: '',
-    lists: []
+    description: ''
   };
 
   $scope.$on('$routeChangeSuccess', function() {
@@ -44,13 +43,12 @@ app.controller('TasksCtrl', function ($scope, $rootScope, $timeout, $location, T
       $scope.task.date = Date.now();
       console.log('$scope.task: ', $scope.task);
       console.log('$scope.user: ', $scope.user);
-      User.addTaskToUser($scope.task, $scope.user).then(function() {
+      Task.addTaskToUser($scope.task, $scope.user).then(function() {
         $scope.populateTasks();
         $scope.task = {                 //resets the task to empty values
           title: '',
           date: '',
-          description: '',
-          lists: []
+          description: ''
         };
       });
     } else {
@@ -60,7 +58,7 @@ app.controller('TasksCtrl', function ($scope, $rootScope, $timeout, $location, T
 
   $scope.populateTasks = function() {
     if ($rootScope.signedIn) {
-      $scope.tasks = User.getUserTasks($rootScope.currentUser.id);
+      $scope.tasks = Task.getUserTasks($rootScope.currentUser.id);
     }
   }
   
@@ -74,8 +72,8 @@ app.controller('TasksCtrl', function ($scope, $rootScope, $timeout, $location, T
 
   $scope.deleteTask = function (taskId) {
     if ($rootScope.signedIn) {
-      var userRef = $rootScope.currentUser.id;
-      User.deleteTaskFromUser(taskId, userRef);
+      var userId = $rootScope.currentUser.id;
+      Task.deleteTaskFromUser(taskId, userId);
     } else {
       console.log('There is no user signed in right now.');
     }
