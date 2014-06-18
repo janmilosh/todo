@@ -6,7 +6,7 @@ app.controller('TasksCtrl', function ($scope, $rootScope, $timeout, $location, T
 
   $rootScope.$on('$firebaseSimpleLogin:login', function(e, user) {
     $rootScope.currentUser = user;
-    $scope.user = User.getCurrentUser($rootScope.currentUser.id);
+    $scope.user = $rootScope.currentUser.id;    
     $rootScope.signedIn = true;
     $scope.populateTasks();
   });
@@ -28,8 +28,7 @@ app.controller('TasksCtrl', function ($scope, $rootScope, $timeout, $location, T
     title: '',
     date: '',
     description: '',
-    lists: [],
-    user: ''
+    lists: []
   };
 
   $scope.$on('$routeChangeSuccess', function() {
@@ -40,46 +39,30 @@ app.controller('TasksCtrl', function ($scope, $rootScope, $timeout, $location, T
     }
   });
 
-  $scope.populateTasks = function() {
-    $scope.userTasks = User.getUserTasks($rootScope.currentUser.id);
-    $scope.userTasks.$on('loaded', function() {
-
-      $scope.tasks = {};
-      var counter = 0;
-      
-      angular.forEach($scope.userTasks, function(value, taskId) {
-        if (value === true) {
-          $scope.tasks[counter] = Task.find(taskId);
-          counter += 1;
-        }
-      });
-    });
-  };
-
   $scope.createTask = function() {
     if ($rootScope.signedIn) {
       $scope.task.date = Date.now();
-      $scope.task.user = $rootScope.currentUser.email;
-      var userRef = $rootScope.currentUser.id;
-      Task.create($scope.task).then(function(ref) {
-        $scope.taskId = ref.name();
-        User.addTaskToUser(userRef, $scope.taskId);
-        
+      console.log('$scope.task: ', $scope.task);
+      console.log('$scope.user: ', $scope.user);
+      User.addTaskToUser($scope.task, $scope.user).then(function() {
+        $scope.populateTasks();
         $scope.task = {                 //resets the task to empty values
           title: '',
           date: '',
           description: '',
-          lists: [],
-          user: ''
+          lists: []
         };
-
-        $scope.populateTasks();
-        $scope.focusOnTitle = true;
       });
     } else {
       console.log('There is no user signed in right now.');
     }
   };
+
+  $scope.populateTasks = function() {
+    if ($rootScope.signedIn) {
+      $scope.tasks = User.getUserTasks($rootScope.currentUser.id);
+    }
+  }
   
   $scope.updateTask = function(taskId, key, value) {
     if ($rootScope.signedIn) {
@@ -92,9 +75,7 @@ app.controller('TasksCtrl', function ($scope, $rootScope, $timeout, $location, T
   $scope.deleteTask = function (taskId) {
     if ($rootScope.signedIn) {
       var userRef = $rootScope.currentUser.id;
-      Task.delete(taskId);
-      User.deleteTaskFromUser(userRef, taskId);
-      $scope.populateTasks();
+      User.deleteTaskFromUser(taskId, userRef);
     } else {
       console.log('There is no user signed in right now.');
     }

@@ -16,6 +16,14 @@ app.factory('Task', function ($firebase, FIREBASE_URL) {
     },
     delete: function(taskId) {
       tasks.$remove(taskId);
+    },
+    addListToTask: function(taskRef, listId) {
+      var task = tasks.$child(taskRef);
+      task.$child('lists').$child(listId).$set(true);
+    },
+    deleteListFromTask: function(taskRef, listId) {
+      var task = Task.getCurrentTask(taskRef);
+      task.$child('lists').$remove(listId);
     }
   };
  

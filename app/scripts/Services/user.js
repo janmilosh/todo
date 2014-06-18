@@ -12,11 +12,11 @@ app.factory('User', function($firebase, FIREBASE_URL) {
       };
       users.$save();
     },
-    addTaskToUser: function(userRef, taskId) {
+    addTaskToUser: function(task, userRef) {
       var user = users.$child(userRef);
-      user.$child('tasks').$child(taskId).$set(true);
+      return user.$child('tasks').$add(task);
     },
-    deleteTaskFromUser: function(userRef, taskId) {
+    deleteTaskFromUser: function(taskId, userRef) {
       var user = User.getCurrentUser(userRef);
       user.$child('tasks').$remove(taskId);
     },

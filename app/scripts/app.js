@@ -12,9 +12,13 @@ var app = angular.module('todoApp', [
 
 app.config(function ($routeProvider) {
   $routeProvider
-    .when('/', {
+    .when('/tasks', {
       templateUrl: 'views/tasks.html',
       controller: 'TasksCtrl'
+    })
+    .when('/', {
+      templateUrl: 'views/lists.html',
+      controller: 'ListsCtrl'
     })
     .when('/register', {
       templateUrl: 'views/register.html',
