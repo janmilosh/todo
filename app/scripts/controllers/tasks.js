@@ -1,12 +1,10 @@
 'use strict';
  
-app.controller('TasksCtrl', function ($scope, $rootScope, $timeout, $location, Task, Auth, User) {
+app.controller('TasksCtrl', function ($scope, $rootScope, $timeout, $location, Task) {
   
-  $scope.focusOnTitle = true;
-
   $rootScope.$on('$firebaseSimpleLogin:login', function(e, user) {
     $rootScope.currentUser = user;
-    $scope.user = $rootScope.currentUser.id;    
+    $scope.user = $rootScope.currentUser.id;
     $rootScope.signedIn = true;
     $scope.populateTasks();
   });
@@ -32,6 +30,7 @@ app.controller('TasksCtrl', function ($scope, $rootScope, $timeout, $location, T
 
   $scope.$on('$routeChangeSuccess', function() {
     if ($rootScope.signedIn) {
+      $scope.user = $rootScope.currentUser.id;
       $scope.populateTasks();
     } else {
       console.log('Waiting for firebase login event to occur.');
@@ -60,7 +59,7 @@ app.controller('TasksCtrl', function ($scope, $rootScope, $timeout, $location, T
     if ($rootScope.signedIn) {
       $scope.tasks = Task.getUserTasks($rootScope.currentUser.id);
     }
-  }
+  };
   
   $scope.updateTaskItem = function(taskId, key, value) {
     if ($rootScope.signedIn) {

@@ -1,21 +1,25 @@
 'use strict';
 
 app.factory('List', function ($firebase, FIREBASE_URL) {
-  var ref = new Firebase(FIREBASE_URL + 'lists');
-  var lists = $firebase(ref);
+  var ref = new Firebase(FIREBASE_URL + 'users');
+  var users = $firebase(ref);
 
   var List = {
-    create: function(list) {
-      return lists.$add(list);
+    addListToUser: function(list, userId) {
+      var user = users.$child(userId);
+      return user.$child('lists').$add(list);
     },
-    find: function(listId) {
-      return lists.$child(listId);
+    getUserLists: function(userId) {
+      var user = users.$child(userId);
+      return user.$child('lists');
     },
-    update: function(listId, key, value) {
-      lists.$child(listId).$child(key).$set(value);
+    deleteListFromUser: function(listId, userId) {
+      var user = users.$child(userId);
+      user.$child('lists').$remove(listId);
     },
-    delete: function(listId) {
-      lists.$remove(listId);
+    updateListItem: function(listId, key, value, userId) {
+      var user = users.$child(userId);
+      user.$child('lists').$child(listId).$child(key).$set(value);
     }
   };
  

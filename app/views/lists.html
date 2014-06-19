@@ -1,1 +1,40 @@
-<h3>The lists view.</h3>
+<div class="container-fluid">
+  <div class="row">
+  
+    <div class="table-wrapper">
+      <h3 ng-show="signedIn">Logged in as: {{ currentUser.email }}</h3>
+      <form name="tableform">  
+        <table class="table">
+          <thead>
+            <tr>
+              <td>List</td>
+              <td class="date-col">Date added</td>
+              <td class="add-col">&nbsp;</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>            
+              <td><input type="text" ng-model="list.title" required></td>
+              <td>{{ now | date: 'mediumDate' }}</td>
+              <td class="text-center create" ><button type="submit" ng-click="createList()" ng-disabled="tableform.$invalid">add</button></td>
+            </tr>
+            <tr ng-repeat="list in lists | orderByPriority | orderBy:'date'">
+              <td><input type="text" ng-model="list.title" ng-blur="updateListItem(list.$id, 'title', list.title)"></td>
+              <td>{{ list.date | date: 'mediumDate' }}</td>
+              <td class="text-center delete-list" ng-click="deleteList(list.$id)">x</td>
+            </tr>
+          </tbody>  
+        </table>
+      </form>
+    </div>
+
+    <div class="form-wrapper visible-xs">
+      <ng-form name="inputform" novalidate>
+        <div class="form-group">
+          <input type="text" class="form-control" ng-model="list.title" placeholder="list" required>
+          <button type="submit" class="form-control" ng-click="createList()" ng-disabled="inputform.$invalid">Add List</button>
+        </div>
+      </ng-form>
+    </div> 
+  </div>
+</div>

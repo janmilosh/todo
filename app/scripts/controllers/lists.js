@@ -1,12 +1,13 @@
 'use strict';
  
-app.controller('ListsCtrl', function ($scope, $rootScope, $timeout, $location, Task, Auth, User, List) {
-
+app.controller('ListsCtrl', function ($scope, $rootScope, $timeout, $location, List) {
+  
   $rootScope.$on('$firebaseSimpleLogin:login', function(e, user) {
     $rootScope.currentUser = user;
-    $scope.user = User.getCurrentUser($rootScope.currentUser.id);
+    $scope.user = $rootScope.currentUser.id;
+    console.log('$scope.user in ListsCtrl: ', $scope.user);
     $rootScope.signedIn = true;
-    // $scope.populateTasks();
+    $scope.populateLists();
   });
 
   $rootScope.$on('$firebaseSimpleLogin:logout', function() {
@@ -25,70 +26,52 @@ app.controller('ListsCtrl', function ($scope, $rootScope, $timeout, $location, T
   $scope.list = {
     title: '',
     date: '',
-    user: ''
   };
 
   $scope.$on('$routeChangeSuccess', function() {
     if ($rootScope.signedIn) {
-      //$scope.populateTasks();
+      $scope.user = $rootScope.currentUser.id;
+      $scope.populateLists();
     } else {
       console.log('Waiting for firebase login event to occur.');
     }
   });
 
-  // $scope.populateTasks = function() {
-  //   $scope.userTasks = User.getUserTasks($rootScope.currentUser.id);
-  //   $scope.userTasks.$on('loaded', function() {
-
-  //     $scope.tasks = {};
-  //     var counter = 0;
-      
-  //     angular.forEach($scope.userTasks, function(value, taskId) {
-  //       if (value === true) {
-  //         $scope.tasks[counter] = Task.find(taskId);
-  //         counter += 1;
-  //       }
-  //     });
-  //   });
-  // };
-
   $scope.createList = function() {
     if ($rootScope.signedIn) {
       $scope.list.date = Date.now();
-      $scope.list.user = $rootScope.currentUser.email;
-
-      var taskRef = $scope.selectedTask.id;
-      List.create($scope.list).then(function(ref) {
-        $scope.listId = ref.name();
-        Task.addListToTask(taskRef, $scope.listId);
-        
-        $scope.list = {                 //resets the task to empty values
+      console.log('$scope.list: ', $scope.list);
+      console.log('$scope.user: ', $scope.user);
+      List.addListToUser($scope.list, $scope.user).then(function() {
+        $scope.populateLists();
+        $scope.list = {                 //resets the list to empty values
           title: '',
           date: '',
-          user: ''
         };
-
-        // $scope.populateTasks();
       });
     } else {
       console.log('There is no user signed in right now.');
     }
   };
-  
-  $scope.updateTask = function(taskId, key, value) {
+
+  $scope.populateLists = function() {
     if ($rootScope.signedIn) {
-      Task.update(taskId, key, value);
+      $scope.list = List.getUserLists($rootScope.currentUser.id);
+    }
+  };
+  
+  $scope.updateListItem = function(listId, key, value) {
+    if ($rootScope.signedIn) {
+      List.updateListItem(listId, key, value, $scope.user);
     } else {
       console.log('There is no user signed in right now.');
     }
   };
 
-  $scope.deleteTask = function (taskId) {
+  $scope.deleteList = function (listId) {
     if ($rootScope.signedIn) {
-      var userRef = $rootScope.currentUser.id;
-      Task.delete(taskId);
-      User.deleteTaskFromUser(userRef, taskId);
-      $scope.populateTasks();
+      var userId = $rootScope.currentUser.id;
+      List.deleteListFromUser(listId, userId);
     } else {
       console.log('There is no user signed in right now.');
     }
