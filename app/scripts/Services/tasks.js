@@ -15,17 +15,12 @@ app.factory('Task', function ($firebase, FIREBASE_URL) {
     },
     deleteTaskFromUser: function(taskId, userId) {
       var user = users.$child(userId);
-      user.$child('tasks').$remove(taskId); 
-    // },
-    // find: function(taskId) {
-    //   return tasks.$child(taskId);
-    // },
-    // update: function(taskId, key, value) {
-    //   tasks.$child(taskId).$child(key).$set(value);
-    // },
-    // delete: function(taskId) {
-    //   tasks.$remove(taskId);
-    // },
+      user.$child('tasks').$remove(taskId);
+    },
+    updateTaskItem: function(taskId, key, value, userId) {
+      var user = users.$child(userId);
+      user.$child('tasks').$child(taskId).$child(key).$set(value);
+    }  
     // addListToTask: function(taskRef, listId) {
     //   var task = tasks.$child(taskRef);
     //   task.$child('lists').$child(listId).$set(true);
@@ -33,8 +28,7 @@ app.factory('Task', function ($firebase, FIREBASE_URL) {
     // deleteListFromTask: function(taskRef, listId) {
     //   var task = Task.getCurrentTask(taskRef);
     //   task.$child('lists').$remove(listId);
-    
-    }
+    // }
   };
  
   return Task;

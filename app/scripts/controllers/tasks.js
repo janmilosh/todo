@@ -62,9 +62,9 @@ app.controller('TasksCtrl', function ($scope, $rootScope, $timeout, $location, T
     }
   }
   
-  $scope.updateTask = function(taskId, key, value) {
+  $scope.updateTaskItem = function(taskId, key, value) {
     if ($rootScope.signedIn) {
-      Task.update(taskId, key, value);
+      Task.updateTaskItem(taskId, key, value, $scope.user);
     } else {
       console.log('There is no user signed in right now.');
     }
