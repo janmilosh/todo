@@ -19,8 +19,17 @@ table, td {
   border: 1px solid #DDD;
 }
 
+.table > tbody > tr > td.create {
+  padding: 0;
+}
+
+.input-row {
+  background: #f4f4f4;
+}
+
 thead {
-  background: #ccc;
+  background: #4444A3;
+  color: white;
 }
 
 .delete-task {

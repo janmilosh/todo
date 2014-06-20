@@ -2,31 +2,30 @@
   <div class="row">
   
     <div class="table-wrapper">
-      <h3 ng-show="signedIn">Logged in as: {{ currentUser.email }}</h3>
       <form name="tableform">  
         <table class="table">
           <thead>
             <tr>
               <td>Task</td>
-              <td>Description</td>
-              <td class="date-col">Date added</td>
-              <td>Lists</td>
+              <td class="hidden-xs">Description</td>
+              <td class="date-col hidden-xs">Date added</td>
+              <td class="hidden-xs">Lists</td>
               <td class="add-col">&nbsp;</td>
             </tr>
           </thead>
           <tbody>
-            <tr>            
+            <tr class="input-row">            
               <td><input type="text" ng-model="task.title" required></td>
-              <td><input type="text" ng-model="task.description"></td>
-              <td>{{ now | date: 'mediumDate' }}</td>
-              <td><input type="text" ng-model="task.lists"></td>
-              <td class="text-center create" ><button type="submit" ng-click="createTask()" ng-disabled="tableform.$invalid">add</button></td>
+              <td class="hidden-xs"><input type="text" ng-model="task.description"></td>
+              <td class="hidden-xs">{{ now | date: 'mediumDate' }}</td>
+              <td class="hidden-xs"></td>
+              <td class="text-center create" ><button class="table-button" ng-click="createTask()" ng-disabled="tableform.$invalid">add</button></td>
             </tr>
             <tr ng-repeat="task in tasks | orderByPriority | orderBy:'date'">
               <td><input type="text" ng-model="task.title" ng-blur="updateTaskItem(task.$id, 'title', task.title)"></td>
-              <td><input type="text" ng-model="task.description" ng-blur="updateTaskItem(task.$id, 'description', task.description)"></td>
-              <td>{{ task.date | date: 'mediumDate' }}</td>
-              <td><input type="text" ng-model="task.lists" ng-blur="updateTaskItem(task.$id, 'lists', task.lists)"></td>
+              <td class="hidden-xs"><input type="text" ng-model="task.description" ng-blur="updateTaskItem(task.$id, 'description', task.description)"></td>
+              <td class="hidden-xs">{{ task.date | date: 'mediumDate' }}</td>
+              <td class="hidden-xs"></td>
               <td class="text-center delete-task" ng-click="deleteTask(task.$id)">x</td>
             </tr>
           </tbody>  
@@ -39,7 +38,6 @@
         <div class="form-group">
           <input type="text" class="form-control" ng-model="task.title" placeholder="Task" required>
           <textarea class="form-control" ng-model="task.description" placeholder="Description"></textarea>
-          <input type="text" class="form-control" ng-model="task.lists" placeholder="Lists">
           <button type="submit" class="form-control" ng-click="createTask()" ng-disabled="inputform.$invalid">Add Task</button>
         </div>
       </ng-form>

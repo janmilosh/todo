@@ -25,7 +25,7 @@ app.controller('ListsCtrl', function ($scope, $rootScope, $timeout, $location, L
 
   $scope.list = {
     title: '',
-    date: '',
+    date: ''
   };
 
   $scope.$on('$routeChangeSuccess', function() {
@@ -46,7 +46,7 @@ app.controller('ListsCtrl', function ($scope, $rootScope, $timeout, $location, L
         $scope.populateLists();
         $scope.list = {                 //resets the list to empty values
           title: '',
-          date: '',
+          date: ''
         };
       });
     } else {
@@ -56,7 +56,7 @@ app.controller('ListsCtrl', function ($scope, $rootScope, $timeout, $location, L
 
   $scope.populateLists = function() {
     if ($rootScope.signedIn) {
-      $scope.list = List.getUserLists($rootScope.currentUser.id);
+      $scope.lists = List.getUserLists($rootScope.currentUser.id);
     }
   };
   
