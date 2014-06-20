@@ -2,7 +2,6 @@
 /* global app:true */
 
 var app = angular.module('todoApp', [
-    'ngCookies',
     'ngResource',
     'ngSanitize',
     'ngRoute',
