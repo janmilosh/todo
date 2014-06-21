@@ -40,7 +40,7 @@
                 <td><input type="text" ng-model="task.title" ng-blur="updateTaskItem(task.$id, 'title', task.title)"></td>
                 <!--<td class="hidden-xs"><input type="text" ng-model="task.description" ng-blur="updateTaskItem(task.$id, 'description', task.description)"></td>-->
                 <!--<td class="hidden-xs">{{ task.date | date: 'mediumDate' }}</td>-->
-                <td></td>
+                <td ng-click="viewTaskDetail(task.$id)"></td>
                 <td class="text-center delete-task hidden-xs" ng-click="deleteTask(task.$id)">x</td>
               </tr>
             </tbody>  

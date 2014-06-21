@@ -20,6 +20,10 @@ app.factory('Task', function ($firebase, FIREBASE_URL) {
     updateTaskItem: function(taskId, key, value, userId) {
       var user = users.$child(userId);
       user.$child('tasks').$child(taskId).$child(key).$set(value);
+    },
+    findTaskById: function(taskId, userId) {
+      var user = users.$child(userId);
+      return user.$child('tasks').$child(taskId);
     }
     // addListToTask: function(taskRef, listId) {
     //   var task = tasks.$child(taskRef);

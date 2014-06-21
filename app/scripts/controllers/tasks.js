@@ -37,8 +37,6 @@ app.controller('TasksCtrl', function ($scope, $rootScope, $timeout, $location, T
     }
   });
 
-  $scope.inputFocused = false;
-
   $scope.createTask = function() {
     if ($rootScope.signedIn) {
       $scope.task.date = Date.now();
@@ -51,8 +49,6 @@ app.controller('TasksCtrl', function ($scope, $rootScope, $timeout, $location, T
           description: ''
         };
       });
-
-      $scope.inputFocused = true;
 
     } else {
       console.log('There is no user signed in right now.');
@@ -73,12 +69,18 @@ app.controller('TasksCtrl', function ($scope, $rootScope, $timeout, $location, T
     }
   };
 
-  $scope.deleteTask = function (taskId) {
+  $scope.deleteTask = function(taskId) {
     if ($rootScope.signedIn) {
       var userId = $rootScope.currentUser.id;
       Task.deleteTaskFromUser(taskId, userId);
     } else {
       console.log('There is no user signed in right now.');
+    }
+  };
+
+  $scope.viewTaskDetail = function(taskId) {
+    if ($rootScope.signedIn) {
+      $location.path('/task/' + taskId);
     }
   };
 
