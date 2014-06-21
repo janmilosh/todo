@@ -37,11 +37,12 @@ app.controller('TasksCtrl', function ($scope, $rootScope, $timeout, $location, T
     }
   });
 
+  $scope.inputFocused = false;
+
   $scope.createTask = function() {
     if ($rootScope.signedIn) {
       $scope.task.date = Date.now();
-      console.log('$scope.task: ', $scope.task);
-      console.log('$scope.user: ', $scope.user);
+      
       Task.addTaskToUser($scope.task, $scope.user).then(function() {
         $scope.populateTasks();
         $scope.task = {                 //resets the task to empty values
@@ -50,6 +51,9 @@ app.controller('TasksCtrl', function ($scope, $rootScope, $timeout, $location, T
           description: ''
         };
       });
+
+      $scope.inputFocused = true;
+
     } else {
       console.log('There is no user signed in right now.');
     }

@@ -12,10 +12,10 @@
               </tr>
             </thead>
             <tbody>
-              <tr class="input-row">            
-                <td><input type="text" ng-model="list.title" required></td>
+              <tr class="input-row">
+                <td><input type="text" ng-model="list.title" required autofocus></td>
                 <td class="hidden-xs">{{ now | date: 'mediumDate' }}</td>
-                <td class="text-center create" ><button class="table-button" type="submit" ng-click="createList()" ng-disabled="tableform.$invalid">add</button></td>
+                <td class="text-center create" ><button class="table-button" type="submit" ng-click="createList()" ng-disabled="tableform.$invalid" set-focus>add</button></td>
               </tr>
               <tr ng-repeat="list in lists | orderByPriority | orderBy:'date'">
                 <td><input type="text" ng-model="list.title" ng-blur="updateListItem(list.$id, 'title', list.title)"></td>

@@ -15,11 +15,11 @@
           </thead>
           <tbody>
             <tr class="input-row">            
-              <td><input type="text" ng-model="task.title" required></td>
+              <td><input type="text" ng-model="task.title" required autofocus></td>
               <td class="hidden-xs"><input type="text" ng-model="task.description"></td>
               <td class="hidden-xs">{{ now | date: 'mediumDate' }}</td>
               <td class="hidden-xs"></td>
-              <td class="text-center create" ><button class="table-button" ng-click="createTask()" ng-disabled="tableform.$invalid">add</button></td>
+              <td class="text-center create" ><button class="table-button" ng-click="createTask()" ng-disabled="tableform.$invalid" set-focus>add</button></td>
             </tr>
             <tr ng-repeat="task in tasks | orderByPriority | orderBy:'date'">
               <td><input type="text" ng-model="task.title" ng-blur="updateTaskItem(task.$id, 'title', task.title)"></td>
