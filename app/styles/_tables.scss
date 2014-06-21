@@ -1,13 +1,12 @@
 .table-wrapper {
   width: 100%;
   float: left;
-  padding-left: 15px;
-  padding-right: 15px;
 }
 
 .table > tbody > tr > td {
   vertical-align: middle;
-  padding: 4px 6px;
+  padding: 4px 8px;
+  height: 36px;
 }
 
 table input[type="text"],
@@ -23,8 +22,9 @@ table, td {
   padding: 0;
 }
 
-.input-row {
-  background: #f4f4f4;
+.input-row,
+.display-row:hover {
+  background: #eee;
 }
 
 thead {
@@ -32,8 +32,13 @@ thead {
   color: white;
 }
 
-.delete-task {
+.delete-task,
+.delete-list {
   cursor: pointer;
+  &:hover {
+    background: $red;
+    color: white;
+  }
 }
 
 .date-col {
@@ -42,5 +47,5 @@ thead {
 
 .add-col,
 .view-col {
-  width: 70px;
+  width: 60px;
 }

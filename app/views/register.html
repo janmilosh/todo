@@ -9,7 +9,7 @@
           <input type="password" ng-model="user.passwordConfirmation" placeholder="Confirm Password" class="form-control" required>
           <p ng-show="passwordMissmatch" class="text-danger">Your passwords don't match, please try again.</p>
           <p ng-show="error" class="text-danger">{{ error }}</p>
-          <input type="submit" value="Register" class="btn btn-primary">
+          <input type="submit" value="Register">
         </form>
         <h2>{{ currentUser.email }}</h2>
       </div>

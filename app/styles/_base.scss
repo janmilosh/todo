@@ -1,9 +1,22 @@
 $green: #3FB921;
 $darkBlue: #4444A3;
 $dustyBlue: #9193B1;
+$red: #EB3838; 
 
 p, a, input, td, button {
   font-size: 16px;
+}
+
+h1, h2, h3 {
+  color: #555;
+}
+
+a {
+  color: $darkBlue;
+  &:hover {
+    color: $darkBlue;
+    text-decoration: underline;
+  }
 }
 
 .container-fluid {
