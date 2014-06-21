@@ -28,7 +28,7 @@ table, td {
 }
 
 thead {
-  background: #4444A3;
+  background: $darkBlue;
   color: white;
 }
 
@@ -40,6 +40,7 @@ thead {
   width: 100px;
 }
 
-.add-col {
+.add-col,
+.view-col {
   width: 70px;
 }

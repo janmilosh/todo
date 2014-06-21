@@ -1,7 +1,19 @@
+$green: #3FB921;
+$darkBlue: #4444A3;
+$dustyBlue: #9193B1;
+
+p, a, input, td, button {
+  font-size: 16px;
+}
+
 .container-fluid {
   margin: 0 auto;
   width: 960px;
   max-width: 100%;
+}
+
+.text-center {
+  text-align: center;
 }
 
 .center-block {

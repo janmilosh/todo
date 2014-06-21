@@ -1,6 +1,40 @@
-ul.nav {
-  list-style-type: none;
-  li {
-    display: inline-block;
+.top-nav {
+  height: 52px;
+  background: $dustyBlue;
+  margin-bottom: 30px;
+  padding: 0 15px;
+  ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    display: block;
+    li {
+      display: inline;
+      a {
+        display: inline-block;
+        padding: 12px 15px;
+        color: white;
+        font-size: 18px;
+        &:hover {
+          color: $darkBlue;
+          text-decoration: none;
+        }
+      }
+    }
+    .nav-left {
+      float: left;
+      text-align: left;
+    }
+    .nav-right {
+      float: right;
+      text-align: right;
+    }
   }
 }
+
+.header {
+  p {
+    float: right;
+  }
+}
+

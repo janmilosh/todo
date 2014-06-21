@@ -1,21 +1,29 @@
-<ul class="nav">
-  <li><a href="#/tasks/">Tasks</a></li>
-  <li><a href="#/lists/">Lists</a></li>
-  <span ng-show="signedIn">
-    <li>
-      <a href="#">{{ currentUser.email }}</a>
-    </li>
-    <li>
-      <a href="#" ng-click="logout()">Logout</a>
-    </li>
-  </span>
-  <span ng-hide="signedIn">
-    <li>
-      <a href="#/register">Register</a>
-    </li>
-    <li>
-      <a href="#/login">Log In</a>
-    </li>
-  </span>
-</ul>
-  
+<div class="header" ng-controller="NavCtrl">
+  <div class="top-nav">
+    <ul>
+
+      <span class="nav-left" ng-show="signedIn">
+        <li><a href="#/tasks/">Tasks</a></li>
+        <li><a href="#/lists/">Lists</a></li>
+      </span>
+      
+      <span class="nav-right">
+        <span ng-show="signedIn">
+          <li>
+            <a href="#" ng-click="logout()">Logout</a>
+          </li>
+        </span>
+        <span ng-hide="signedIn">
+          <li>
+            <a href="#/register">Register</a>
+          </li>
+          <li>
+            <a href="#/login">Log In</a>
+          </li>
+        </span>
+      </span>
+
+    </ul>
+  </div>
+</div>
+

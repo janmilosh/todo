@@ -6,20 +6,20 @@
           <table class="table">
             <thead>
               <tr>
-                <td>List</td>
-                <td class="date-col hidden-xs">Date added</td>
+                <td>Lists for {{ currentUser.email }}</td>
+                <!--<td class="date-col hidden-xs">Date added</td>-->
                 <td class="add-col">&nbsp;</td>
               </tr>
             </thead>
             <tbody>
               <tr class="input-row">
                 <td><input type="text" ng-model="list.title" required autofocus></td>
-                <td class="hidden-xs">{{ now | date: 'mediumDate' }}</td>
+                <!--<td class="hidden-xs">{{ now | date: 'mediumDate' }}</td>-->
                 <td class="text-center create" ><button class="table-button" type="submit" ng-click="createList()" ng-disabled="tableform.$invalid" set-focus>add</button></td>
               </tr>
               <tr ng-repeat="list in lists | orderByPriority | orderBy:'date'">
                 <td><input type="text" ng-model="list.title" ng-blur="updateListItem(list.$id, 'title', list.title)"></td>
-                <td class="hidden-xs">{{ list.date | date: 'mediumDate' }}</td>
+                <!--<td class="hidden-xs">{{ list.date | date: 'mediumDate' }}</td>-->
                 <td class="text-center delete-list" ng-click="deleteList(list.$id)">x</td>
               </tr>
             </tbody>  
