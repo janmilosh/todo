@@ -1,12 +1,13 @@
 'use strict';
 
-app.controller('TaskDetailCtrl', function ($scope, $rootScope, $routeParams, $location, User, Task) {
+app.controller('TaskDetailCtrl', function ($scope, $rootScope, $routeParams, $location, User, Task, List) {
     
   $rootScope.$on('$firebaseSimpleLogin:login', function(e, user) {
     $rootScope.currentUser = user;
     $scope.user = $rootScope.currentUser.id;
     $rootScope.signedIn = true;
     $scope.populateTaskDetails();
+    $scope.populateLists();
   });
 
   $rootScope.$on('$firebaseSimpleLogin:logout', function() {
@@ -17,6 +18,7 @@ app.controller('TaskDetailCtrl', function ($scope, $rootScope, $routeParams, $lo
 
   $scope.$on('$routeChangeSuccess', function() {
     $scope.populateTaskDetails();
+    $scope.populateLists();
   });
   
   $scope.populateTaskDetails = function() {
@@ -27,4 +29,11 @@ app.controller('TaskDetailCtrl', function ($scope, $rootScope, $routeParams, $lo
       console.log('in the detail page, not signed in yet');
     }
   };
+
+  $scope.populateLists = function() {
+    if ($rootScope.signedIn) {
+      $scope.lists = List.getUserLists($rootScope.currentUser.id);
+    }
+  };
+  
 });

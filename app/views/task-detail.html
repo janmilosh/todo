@@ -4,5 +4,9 @@
   <p>Title: {{ task.title }}</p>
   <p>Description: {{ task.description }}</p>
   <p>Date added: {{ task.date | date: 'mediumDate' }}</p>
-</div>
 
+  <h2>The lists</h2>
+  <div ng-repeat="list in lists | orderByPriority">
+    <p>{{ list.title }}, {{ list.date | date: 'mediumDate' }} {{ list.$priority }}</p>
+  </div>
+</div>
