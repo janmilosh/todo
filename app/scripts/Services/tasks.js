@@ -28,6 +28,14 @@ app.factory('Task', function ($firebase, FIREBASE_URL) {
       } else {
         return null;
       }
+    },
+    addListToTask: function(taskId, listId, userId) {
+      var user = users.$child(userId);
+      user.$child('tasks').$child(taskId).$child(listId).$set(true);
+    },
+    deleteListFromTask: function(taskId, listId, userId) {
+      var user = users.$child(userId);
+      user.$child('tasks').$child(taskId).$remove(listId);
     }
   };
   return Task;

@@ -39,6 +39,7 @@ app.controller('TaskDetailCtrl', function ($scope, $rootScope, $routeParams, $lo
   $scope.addTaskToList = function(taskId, listId) {
     if ($rootScope.signedIn) {
       List.addTaskToList(taskId, listId, $scope.user);
+      Task.addListToTask(taskId, listId, $scope.user);
     }
   };
 });
