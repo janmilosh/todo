@@ -35,5 +35,10 @@ app.controller('TaskDetailCtrl', function ($scope, $rootScope, $routeParams, $lo
       $scope.lists = List.getUserLists($rootScope.currentUser.id);
     }
   };
-  
+
+  $scope.addTaskToList = function(taskId, listId) {
+    if ($rootScope.signedIn) {
+      List.addTaskToList(taskId, listId, $scope.user);
+    }
+  };
 });

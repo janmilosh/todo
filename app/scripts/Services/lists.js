@@ -20,8 +20,15 @@ app.factory('List', function ($firebase, FIREBASE_URL) {
     updateListItem: function(listId, key, value, userId) {
       var user = users.$child(userId);
       user.$child('lists').$child(listId).$child(key).$set(value);
+    },
+    addTaskToList: function(taskId, listId, userId) {
+      var user = users.$child(userId);
+      user.$child('lists').$child(listId).$child(taskId).$set(true);
+    },
+    deleteTaskFromList: function(taskId, userId) {
+      var user = users.$child(userId);
+      user.$child('lists').$remove(taskId);
     }
   };
- 
   return List;
 });

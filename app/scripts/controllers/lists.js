@@ -25,7 +25,8 @@ app.controller('ListsCtrl', function ($scope, $rootScope, $timeout, $location, L
 
   $scope.list = {
     title: '',
-    date: ''
+    date: '',
+    $priority: 3
   };
 
   $scope.$on('$routeChangeSuccess', function() {
@@ -46,7 +47,8 @@ app.controller('ListsCtrl', function ($scope, $rootScope, $timeout, $location, L
         $scope.populateLists();
         $scope.list = {                 //resets the list to empty values
           title: '',
-          date: ''
+          date: '',
+          $priority: 3
         };
       });
     } else {

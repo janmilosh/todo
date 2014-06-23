@@ -7,6 +7,6 @@
 
   <h2>The lists</h2>
   <div ng-repeat="list in lists | orderByPriority">
-    <p>{{ list.title }}, {{ list.date | date: 'mediumDate' }} {{ list.$priority }}</p>
+    <p ng-click="addTaskToList(task.$id, list.$id)">{{ list.title }}, {{ list.date | date: 'mediumDate' }} {{ list.$priority }}</p>
   </div>
 </div>

@@ -28,17 +28,7 @@ app.factory('Task', function ($firebase, FIREBASE_URL) {
       } else {
         return null;
       }
-      
     }
-    // addListToTask: function(taskRef, listId) {
-    //   var task = tasks.$child(taskRef);
-    //   task.$child('lists').$child(listId).$set(true);
-    // },
-    // deleteListFromTask: function(taskRef, listId) {
-    //   var task = Task.getCurrentTask(taskRef);
-    //   task.$child('lists').$remove(listId);
-    // }
   };
- 
   return Task;
 });
