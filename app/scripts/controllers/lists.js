@@ -41,8 +41,6 @@ app.controller('ListsCtrl', function ($scope, $rootScope, $timeout, $location, L
   $scope.createList = function() {
     if ($rootScope.signedIn) {
       $scope.list.date = Date.now();
-      console.log('$scope.list: ', $scope.list);
-      console.log('$scope.user: ', $scope.user);
       List.addListToUser($scope.list, $scope.user).then(function() {
         $scope.populateLists();
         $scope.list = {                 //resets the list to empty values

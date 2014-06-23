@@ -1,6 +1,6 @@
 'use strict';
  
-app.controller('TasksCtrl', function ($scope, $rootScope, $timeout, $location, Task) {
+app.controller('TasksCtrl', function ($scope, $rootScope, $timeout, $location, Task, List) {
   
   $rootScope.$on('$firebaseSimpleLogin:login', function(e, user) {
     $rootScope.currentUser = user;
@@ -41,17 +41,27 @@ app.controller('TasksCtrl', function ($scope, $rootScope, $timeout, $location, T
     if ($rootScope.signedIn) {
       $scope.task.date = Date.now();
       
-      Task.addTaskToUser($scope.task, $scope.user).then(function() {
+      Task.addTaskToUser($scope.task, $scope.user).then(function(returnObject) {
         $scope.populateTasks();
         $scope.task = {                 //resets the task to empty values
           title: '',
           date: '',
           description: ''
         };
+        var taskId = returnObject.path.n[3]; //thought the actual id was to be returned, but instead
+        $scope.addTaskToInbox(taskId);        //some kind of crazy object that contains the path
       });
+      
 
     } else {
       console.log('There is no user signed in right now.');
+    }
+  };
+
+  $scope.addTaskToInbox = function(taskId) {
+    if ($rootScope.signedIn) {
+      List.addTaskToList(taskId, 'inbox', $scope.user);
+      Task.addListToTask(taskId, 'inbox', $scope.user);
     }
   };
 
