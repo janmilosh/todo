@@ -42,4 +42,23 @@ app.controller('TaskDetailCtrl', function ($scope, $rootScope, $routeParams, $lo
       Task.addListToTask(taskId, listId, $scope.user);
     }
   };
+
+  $scope.highlightList = function(listId) {
+    
+    angular.forEach($scope.task, function(taskValue, taskListId) {
+      if (taskValue === true && listId === taskListId) {
+        console.log('A task list', taskListId)
+        console.log('the task', $scope.task);
+        return true;
+      }         
+    });
+
+    // angular.forEach($scope.lists, function(listValue, key) {
+    //   if (key === taskListId) {
+    //     console.log('A task list', taskListId)
+    //     list.onTask = true;
+    //   }
+    // });
+  };
+
 });
