@@ -8,6 +8,7 @@ app.controller('TaskDetailCtrl', function ($scope, $rootScope, $routeParams, $lo
     $rootScope.signedIn = true;
     $scope.populateTaskDetails();
     $scope.populateLists();
+    $scope.highlightList();
   });
 
   $rootScope.$on('$firebaseSimpleLogin:logout', function() {
@@ -19,8 +20,9 @@ app.controller('TaskDetailCtrl', function ($scope, $rootScope, $routeParams, $lo
   $scope.$on('$routeChangeSuccess', function() {
     $scope.populateTaskDetails();
     $scope.populateLists();
+    $scope.highlightList();
   });
-  
+
   $scope.populateTaskDetails = function() {
     if ($rootScope.signedIn) {
       $scope.user = $rootScope.currentUser.id;
@@ -40,25 +42,22 @@ app.controller('TaskDetailCtrl', function ($scope, $rootScope, $routeParams, $lo
     if ($rootScope.signedIn) {
       List.addTaskToList(taskId, listId, $scope.user);
       Task.addListToTask(taskId, listId, $scope.user);
+      $scope.listsToHighlight[listId] = true;
     }
   };
-
-  $scope.highlightList = function(listId) {
-    
+  
+  $scope.highlightList = function() {
+    $scope.listsToHighlight = {};
     angular.forEach($scope.task, function(taskValue, taskListId) {
-      if (taskValue === true && listId === taskListId) {
-        console.log('A task list', taskListId)
-        console.log('the task', $scope.task);
-        return true;
-      }         
+      if (taskValue === true) {
+        angular.forEach($scope.lists, function(listValue, key) {
+          if (key === taskListId) {
+            $scope.listsToHighlight[key] = true;
+          }
+        });
+      }
     });
-
-    // angular.forEach($scope.lists, function(listValue, key) {
-    //   if (key === taskListId) {
-    //     console.log('A task list', taskListId)
-    //     list.onTask = true;
-    //   }
-    // });
+    return $scope.listsToHighlight;
   };
 
 });
