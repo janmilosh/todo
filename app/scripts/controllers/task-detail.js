@@ -8,7 +8,7 @@ app.controller('TaskDetailCtrl', function ($scope, $rootScope, $routeParams, $lo
     $rootScope.signedIn = true;
     $scope.populateTaskDetails();
     $scope.populateLists();
-    $scope.isTaskOnList();
+    $scope.highlightLists();
   });
 
   $rootScope.$on('$firebaseSimpleLogin:logout', function() {
@@ -20,7 +20,7 @@ app.controller('TaskDetailCtrl', function ($scope, $rootScope, $routeParams, $lo
   $scope.$on('$routeChangeSuccess', function() {
     $scope.populateTaskDetails();
     $scope.populateLists();
-    $scope.isTaskOnList();
+    $scope.highlightLists();
   });
 
   $scope.populateTaskDetails = function() {
@@ -38,8 +38,8 @@ app.controller('TaskDetailCtrl', function ($scope, $rootScope, $routeParams, $lo
     }
   };
 
-  $scope.addOrRemoveTaskFromList = function(taskId, listId) {
-    if ($scope.isTaskOnList) {
+  $scope.addOrRemoveTaskFromList = function(taskId, listId) { //This needs to be fixed, use highlight menthod parts todetermine if true or false
+    if (false) {
       console.log('removing task in add or remove');
       $scope.removeTaskFromList(taskId, listId);
     } else {
@@ -66,7 +66,7 @@ app.controller('TaskDetailCtrl', function ($scope, $rootScope, $routeParams, $lo
     }
   };
   
-  $scope.isTaskOnList = function() {
+  $scope.highlightLists = function() {   //This might be able to be refactored and part taken out as a separate function
     $scope.listsToHighlight = {};
     angular.forEach($scope.task, function(taskValue, taskListId) {
       if (taskValue === true) {
