@@ -8,7 +8,7 @@ app.controller('TaskDetailCtrl', function ($scope, $rootScope, $routeParams, $lo
     $rootScope.signedIn = true;
     $scope.populateTaskDetails();
     $scope.populateLists();
-    $scope.highlightList();
+    $scope.isTaskOnList();
   });
 
   $rootScope.$on('$firebaseSimpleLogin:logout', function() {
@@ -20,7 +20,7 @@ app.controller('TaskDetailCtrl', function ($scope, $rootScope, $routeParams, $lo
   $scope.$on('$routeChangeSuccess', function() {
     $scope.populateTaskDetails();
     $scope.populateLists();
-    $scope.highlightList();
+    $scope.isTaskOnList();
   });
 
   $scope.populateTaskDetails = function() {
@@ -38,21 +38,42 @@ app.controller('TaskDetailCtrl', function ($scope, $rootScope, $routeParams, $lo
     }
   };
 
+  $scope.addOrRemoveTaskFromList = function(taskId, listId) {
+    if ($scope.isTaskOnList) {
+      console.log('removing task in add or remove');
+      $scope.removeTaskFromList(taskId, listId);
+    } else {
+      console.log('adding task in add or remove');
+      $scope.addTaskToList(taskId, listId);
+    }
+  }
+
   $scope.addTaskToList = function(taskId, listId) {
     if ($rootScope.signedIn) {
       List.addTaskToList(taskId, listId, $scope.user);
       Task.addListToTask(taskId, listId, $scope.user);
+      console.log('adding task in add task');
       $scope.listsToHighlight[listId] = true;
     }
   };
+
+  $scope.removeTaskFromList = function(taskId, listId) {
+    if ($rootScope.signedIn) {
+      List.deleteTaskFromList(taskId, listId, $scope.user);
+      Task.deleteListFromTask(taskId, listId, $scope.user);
+      console.log('removing task in remove task');
+      $scope.listsToHighlight[listId] = false;
+    }
+  };
   
-  $scope.highlightList = function() {
+  $scope.isTaskOnList = function() {
     $scope.listsToHighlight = {};
     angular.forEach($scope.task, function(taskValue, taskListId) {
       if (taskValue === true) {
         angular.forEach($scope.lists, function(listValue, key) {
           if (key === taskListId) {
             $scope.listsToHighlight[key] = true;
+            return true;
           }
         });
       }
