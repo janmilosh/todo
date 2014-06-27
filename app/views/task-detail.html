@@ -7,6 +7,6 @@
 
   <h2>The lists</h2>
   <div ng-repeat="list in lists | orderByPriority">
-    <p ng-class="{highlight: listsToHighlight[list.$id]}" ng-click="addOrRemoveTaskFromList(task.$id, list.$id)">{{ list.title }}, {{ list.date | date: 'mediumDate' }}, {{ list.$priority }}, {{list.$id}}</p>
+    <p ng-class="{highlight: listsToHighlight[list.$id]}" ng-click="addOrRemoveTaskFromList(list.$id)">{{ list.title }}, {{ list.date | date: 'mediumDate' }}, {{ list.$priority }}, {{list.$id}}</p>
   </div>
 </div>

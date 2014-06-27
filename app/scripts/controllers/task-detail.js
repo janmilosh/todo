@@ -35,41 +35,31 @@ app.controller('TaskDetailCtrl', function ($scope, $rootScope, $routeParams, $lo
   $scope.populateLists = function() {
     if ($rootScope.signedIn) {
       $scope.lists = List.getUserLists($rootScope.currentUser.id);
-      console.log('$scope.lists', $scope.lists);
     }
   };
 
-  $scope.addOrRemoveTaskFromList = function(taskId, listId) { //This needs to be fixed, use highlight menthod parts todetermine if true or false
-    var taskQuery = $scope.taskIsOnList(taskId, listId);
-    console.log('taskQuery', taskQuery);
-    if (!taskQuery) {                                      //true if the task is on the list, so remove
-      console.log('removing task in add or remove');
-      $scope.removeTaskFromList(taskId, listId);
+  $scope.addOrRemoveTaskFromList = function(listId) { //This needs to be fixed, use highlight menthod parts todetermine if true or false
+    if ($scope.taskIsOnList(listId)) {                                      //true if the task is on the list, so remove
+      $scope.removeTaskFromList($scope.task.$id, listId);
     } else {
-      console.log('adding task in add or remove');
-      $scope.addTaskToList(taskId, listId);
+      $scope.addTaskToList($scope.task.$id, listId);
     }
   }
 
-  $scope.taskIsOnList = function(taskId, listId) {
-    console.log('listId', listId);
-    console.log('taskId', taskId);
-    if ($rootScope.signedIn) {
-      angular.forEach($scope.task.lists, function(taskValue, taskListId) {
-        console.log(listId===taskListId);
-        if (listId === taskListId) {
-          console.log('should be returning now');
-          return true;
-        }
-      });
-    }
+  $scope.taskIsOnList = function(listId) {
+    var onList = false;
+    angular.forEach($scope.task.lists, function(taskValue, taskListId) {
+      if (listId === taskListId) {
+        onList =  true;
+      }
+    });
+    return onList;
   };
 
   $scope.addTaskToList = function(taskId, listId) {
     if ($rootScope.signedIn) {
       List.addTaskToList(taskId, listId, $scope.user);
       Task.addListToTask(taskId, listId, $scope.user);
-      console.log('adding task in add task');
       $scope.listsToHighlight[listId] = true;
     }
   };
@@ -78,7 +68,6 @@ app.controller('TaskDetailCtrl', function ($scope, $rootScope, $routeParams, $lo
     if ($rootScope.signedIn) {
       List.deleteTaskFromList(taskId, listId, $scope.user);
       Task.deleteListFromTask(taskId, listId, $scope.user);
-      console.log('removing task in remove task');
       $scope.listsToHighlight[listId] = false;
     }
   };
