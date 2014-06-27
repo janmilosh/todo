@@ -31,11 +31,12 @@ app.factory('Task', function ($firebase, FIREBASE_URL) {
     },
     addListToTask: function(taskId, listId, userId) {
       var user = users.$child(userId);
-      user.$child('tasks').$child(taskId).$child(listId).$set(true);
+      user.$child('tasks').$child(taskId).$child('lists').$child(listId).$set(true);
+
     },
     deleteListFromTask: function(taskId, listId, userId) {
       var user = users.$child(userId);
-      user.$child('tasks').$child(taskId).$remove(listId);
+      user.$child('tasks').$child(taskId).$child('lists').$remove(listId);
     }
   };
   return Task;
