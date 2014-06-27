@@ -19,8 +19,9 @@ a {
   }
 }
 
-.highlight {
-  background: yellow;
+button.list-button.highlight {
+  background: $darkBlue;
+  color: white;
 }
 
 .container-fluid {

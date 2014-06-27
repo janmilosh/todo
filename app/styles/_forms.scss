@@ -6,6 +6,7 @@
 
 .form-control {
   margin-bottom: 8px;
+  font-size: 16px;
 }
 
 form button {
@@ -37,6 +38,7 @@ form.ng-valid button {
 input[type="text"],
 textarea {
   width: 100%;
+  font-size: 16px;
 }
 
 input[type="submit"] {
@@ -47,5 +49,18 @@ input[type="submit"] {
   padding: 6px 10px;
   &:hover {
     background: darken($green, 10%);
+  }
+}
+
+button.list-button {
+  border-radius: 5px;
+  border: 1px solid #666;
+  background: #eee;
+  padding: 5px 8px;
+  font-size: 16px;
+  float: left;
+  margin-right: 10px;
+  &:active {
+    outline: none;
   }
 }

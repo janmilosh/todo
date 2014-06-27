@@ -37,7 +37,7 @@
                 <td><input type="text" ng-model="list.title" ng-blur="updateListItem(list.$id, 'title', list.title)"></td>
                 <!--<td class="hidden-xs">{{ list.date | date: 'mediumDate' }}</td>-->
                 <td></td>
-                <td class="text-center delete-list hidden-xs" ng-click="deleteList(list.$id)">x</td>
+                <td class="text-center delete-list hidden-xs" ng-click="deleteList(list.$id, list.$priority)">x</td>
               </tr>
             </tbody>  
           </table>

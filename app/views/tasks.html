@@ -2,11 +2,10 @@
 
   <div class="row">
     <div class="col-xs-12">  
-      <div class="form-wrapper visible-xs">
+      <div class="form-wrapper">
         <ng-form name="inputform" novalidate>
           <div class="form-group">
             <input type="text" class="form-control" ng-model="task.title" placeholder="Task" required>
-            <!--<textarea class="form-control" ng-model="task.description" placeholder="Description"></textarea>-->
             <button type="submit" class="form-control" ng-click="createTask()" ng-disabled="inputform.$invalid">Add Task</button>
           </div>
         </ng-form>
@@ -21,26 +20,13 @@
           <table class="table">
             <thead>
               <tr>
-                <td>Tasks for {{ currentUser.email }}</td>
-                <!--<td class="hidden-xs">Description</td>-->
-                <!--<td class="date-col hidden-xs">Date added</td>-->
-                <td class="view-col text-center">View</td>
-                <td class="add-col hidden-xs">&nbsp;</td>
+                <td>Tasks for {{ currentUser.email }}</td>              
+                <td class="view-col text-center">delete</td>
               </tr>
             </thead>
             <tbody>
-              <tr class="input-row hidden-xs">            
-                <td><input type="text" ng-model="task.title" required autofocus></td>
-                <!--<td class="hidden-xs"><input type="text" ng-model="task.description"></td>-->
-                <!--<td class="hidden-xs">{{ now | date: 'mediumDate' }}</td>-->
-                <td></td>
-                <td class="text-center create" ><button class="table-button" ng-click="createTask()" ng-disabled="tableform.$invalid" set-focus>add</button></td>
-              </tr>
               <tr class="display-row" ng-repeat="task in tasks | orderByPriority | orderBy:'date'">
-                <td><input type="text" ng-model="task.title" ng-blur="updateTaskItem(task.$id, 'title', task.title)"></td>
-                <!--<td class="hidden-xs"><input type="text" ng-model="task.description" ng-blur="updateTaskItem(task.$id, 'description', task.description)"></td>-->
-                <!--<td class="hidden-xs">{{ task.date | date: 'mediumDate' }}</td>-->
-                <td ng-click="viewTaskDetail(task.$id)"></td>
+                <td ng-click="viewTaskDetail(task.$id)">{{ task.title }}</td>                
                 <td class="text-center delete-task hidden-xs" ng-click="deleteTask(task.$id)">x</td>
               </tr>
             </tbody>  

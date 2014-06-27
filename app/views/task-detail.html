@@ -1,12 +1,15 @@
 <div class="container-fluid">
-  <h3>Task Detail</h3>
-  <p>The taskId: {{ task.$id }}</p>
-  <p>Title: {{ task.title }}</p>
-  <p>Description: {{ task.description }}</p>
-  <p>Date added: {{ task.date | date: 'mediumDate' }}</p>
+  <div class="row">
+    <div class="col-sm-6">
+      <h3>Edit task</h3>
+      <input type="text" class="form-control" ng-model="task.title" required ng-blur="updateTaskItem(task.$id, 'title', task.title)">
+      <textarea class="form-control" ng-model="task.description" placeholder="Task description" ng-blur="updateTaskItem(task.$id, 'description', task.description)"></textarea>
+      <p>Added {{ task.date | date: 'mediumDate' }}</p>
 
-  <h2>The lists</h2>
-  <div ng-repeat="list in lists | orderByPriority">
-    <p ng-class="{highlight: listsToHighlight[list.$id]}" ng-click="addOrRemoveTaskFromList(list.$id)">{{ list.title }}, {{ list.date | date: 'mediumDate' }}, {{ list.$priority }}, {{list.$id}}</p>
+      <div ng-repeat="list in lists | orderByPriority">
+        <button set-focus class="list-button" ng-class="{highlight: listsToHighlight[list.$id]}" ng-click="addOrRemoveTaskFromList(list.$id)">{{ list.title }}</button>
+      </div>
+    </div>
   </div>
+    
 </div>

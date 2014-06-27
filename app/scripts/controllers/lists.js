@@ -49,8 +49,6 @@ app.controller('ListsCtrl', function ($scope, $rootScope, $timeout, $location, L
           $priority: 3
         };
       });
-    } else {
-      console.log('There is no user signed in right now.');
     }
   };
 
@@ -63,17 +61,12 @@ app.controller('ListsCtrl', function ($scope, $rootScope, $timeout, $location, L
   $scope.updateListItem = function(listId, key, value) {
     if ($rootScope.signedIn) {
       List.updateListItem(listId, key, value, $scope.user);
-    } else {
-      console.log('There is no user signed in right now.');
     }
   };
 
-  $scope.deleteList = function (listId) {
-    if ($rootScope.signedIn) {
-      var userId = $rootScope.currentUser.id;
-      List.deleteListFromUser(listId, userId);
-    } else {
-      console.log('There is no user signed in right now.');
+  $scope.deleteList = function (listId, listPriority) {
+    if ($rootScope.signedIn && listPriority >=3) {
+      List.deleteListFromUser(listId, $scope.user);
     }
   };
 

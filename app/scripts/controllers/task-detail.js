@@ -32,19 +32,27 @@ app.controller('TaskDetailCtrl', function ($scope, $rootScope, $routeParams, $lo
     }
   };
 
+  $scope.updateTaskItem = function(taskId, key, value) {
+    if ($rootScope.signedIn) {
+      Task.updateTaskItem(taskId, key, value, $scope.user);
+    } else {
+      console.log('There is no user signed in right now.');
+    }
+  };
+
   $scope.populateLists = function() {
     if ($rootScope.signedIn) {
       $scope.lists = List.getUserLists($rootScope.currentUser.id);
     }
   };
 
-  $scope.addOrRemoveTaskFromList = function(listId) { //This needs to be fixed, use highlight menthod parts todetermine if true or false
-    if ($scope.taskIsOnList(listId)) {                                      //true if the task is on the list, so remove
+  $scope.addOrRemoveTaskFromList = function(listId) {
+    if ($scope.taskIsOnList(listId)) {
       $scope.removeTaskFromList($scope.task.$id, listId);
     } else {
       $scope.addTaskToList($scope.task.$id, listId);
     }
-  }
+  };
 
   $scope.taskIsOnList = function(listId) {
     var onList = false;
@@ -72,7 +80,7 @@ app.controller('TaskDetailCtrl', function ($scope, $rootScope, $routeParams, $lo
     }
   };
   
-  $scope.highlightLists = function() {   //This might be able to be refactored and part taken out as a separate function
+  $scope.highlightLists = function() {
     $scope.listsToHighlight = {};
     if ($rootScope.signedIn) {
       angular.forEach($scope.task.lists, function(taskValue, taskListId) {
