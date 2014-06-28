@@ -1,6 +1,6 @@
 'use strict';
  
-app.controller('ListsCtrl', function ($scope, $rootScope, $timeout, $location, List, Task) {
+app.controller('ListsCtrl', function ($scope, $rootScope, $timeout, $location, List) {
   
   $rootScope.$on('$firebaseSimpleLogin:login', function(e, user) {
     $rootScope.currentUser = user;

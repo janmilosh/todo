@@ -52,6 +52,7 @@ app.controller('TaskDetailCtrl', function ($scope, $rootScope, $routeParams, $lo
     } else {
       $scope.addTaskToList($scope.task.$id, listId);
     }
+    $scope.toggleTaskToInbox();
   };
 
   $scope.taskIsOnList = function(listId) {
@@ -79,7 +80,17 @@ app.controller('TaskDetailCtrl', function ($scope, $rootScope, $routeParams, $lo
       $scope.listsToHighlight[listId] = false;
     }
   };
-  
+
+  $scope.toggleTaskToInbox = function() {
+    if ($rootScope.signedIn) {
+      if ($scope.task.lists) {
+        $scope.removeTaskFromList($routeParams.taskId, 'inbox');
+      } else {
+        $scope.addTaskToList($routeParams.taskId, 'inbox');
+      }
+    }
+  };
+
   $scope.highlightLists = function() {
     $timeout(function() {
       $scope.listsToHighlight = {};
