@@ -5,8 +5,8 @@
       <div class="form-wrapper">
         <form name="inputform" novalidate>
           <div class="form-group">
-            <input type="text" class="form-control" ng-model="list.title" placeholder="Put your list title here" required set-focus autofocus>
-            <button type="submit" class="form-control" ng-click="createList()" ng-disabled="inputform.$invalid">Create new list</button>
+            <input type="text" class="form-control" ng-model="list.title" placeholder="Put your list title here" required autofocus>
+            <button set-focus type="submit" class="form-control" ng-click="createList()" ng-disabled="inputform.$invalid">Create new list</button>
           </div>
         </form>
         <table class="table">
@@ -17,9 +17,10 @@
             </tr>
           </thead>
           <tbody>
-            <tr class="display-row" ng-repeat="list in lists | orderByPriority">
+            <tr ng-class="{'display-row': list.$priority > 2}" ng-repeat="list in lists | orderByPriority">
               <td class="view-list">{{ list.title }}</td>
-              <td class="text-center delete-list" ng-click="deleteList(list.$id, list.$priority)">x</td>
+              <td ng-show="hideListDeleteButton(list.$priority)"></td>
+              <td ng-hide="hideListDeleteButton(list.$priority)" class="text-center delete-list" ng-click="deleteList(list.$id, list.$priority)">x</td>
             </tr>
           </tbody>  
         </table>

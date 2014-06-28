@@ -5,8 +5,8 @@
       <div class="form-wrapper">
         <form name="inputform" novalidate>
           <div class="form-group">
-            <input type="text" class="form-control" ng-model="task.title" placeholder="Put your task title here" required>
-            <button type="submit" set-focus autofocus class="form-control" ng-click="createTask()" ng-disabled="inputform.$invalid">Create new task</button>
+            <input type="text" class="form-control" ng-model="task.title" placeholder="Put your task title here" required autofocus>
+            <button type="submit" set-focus class="form-control" ng-click="createTask()" ng-disabled="inputform.$invalid">Create new task</button>
           </div>
         </form>
         <table class="table">

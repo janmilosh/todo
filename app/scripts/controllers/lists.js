@@ -5,7 +5,6 @@ app.controller('ListsCtrl', function ($scope, $rootScope, $timeout, $location, L
   $rootScope.$on('$firebaseSimpleLogin:login', function(e, user) {
     $rootScope.currentUser = user;
     $scope.user = $rootScope.currentUser.id;
-    console.log('$scope.user in ListsCtrl: ', $scope.user);
     $rootScope.signedIn = true;
     $scope.populateLists();
   });
@@ -78,6 +77,10 @@ app.controller('ListsCtrl', function ($scope, $rootScope, $timeout, $location, L
         });
       });
     }
+  };
+
+  $scope.hideListDeleteButton = function(listPriority) {
+    return (listPriority <= 2);
   };
 
 });

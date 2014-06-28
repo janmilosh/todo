@@ -5,7 +5,7 @@
       <input type="text" class="form-control" ng-model="task.title" required ng-blur="updateTaskItem(task.$id, 'title', task.title)">
       <textarea class="form-control" ng-model="task.description" placeholder="Task description" ng-blur="updateTaskItem(task.$id, 'description', task.description)"></textarea>
       <div ng-repeat="list in lists | orderByPriority">
-        <button set-focus class="list-button" ng-class="{highlight: listsToHighlight[list.$id]}" ng-click="addOrRemoveTaskFromList(list.$id)">{{ list.title }}</button>
+        <button class="list-button" ng-class="{highlight: listsToHighlight[list.$id]}" ng-click="addOrRemoveTaskFromList(list.$id)">{{ list.title }}</button>
       </div>
     </div>
   </div>
