@@ -81,8 +81,18 @@ app.controller('TasksCtrl', function ($scope, $rootScope, $timeout, $location, T
 
   $scope.deleteTask = function(taskId) {
     if ($rootScope.signedIn) {
-      var userId = $rootScope.currentUser.id;
-      Task.deleteTaskFromUser(taskId, userId);
+
+      Task.deleteTaskFromUser(taskId, $scope.user);
+      $scope.lists = List.getUserLists($rootScope.currentUser.id);
+
+      angular.forEach($scope.lists, function(listValue, listKey) {
+        angular.forEach(listValue.tasks, function(listTaskValue, listTaskKey) {
+          if (listTaskKey === taskId) {
+            List.deleteTaskFromList(taskId, listKey, $scope.user);
+          }
+        });
+      });
+
     } else {
       console.log('There is no user signed in right now.');
     }

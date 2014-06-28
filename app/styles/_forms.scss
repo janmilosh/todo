@@ -54,12 +54,13 @@ input[type="submit"] {
 
 button.list-button {
   border-radius: 5px;
-  border: 1px solid #666;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
   background: #eee;
   padding: 5px 8px;
   font-size: 16px;
   float: left;
-  margin-right: 10px;
+  margin: 0 8px 8px 0;
   &:active {
     outline: none;
   }

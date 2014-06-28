@@ -1,6 +1,6 @@
 'use strict';
  
-app.controller('ListsCtrl', function ($scope, $rootScope, $timeout, $location, List) {
+app.controller('ListsCtrl', function ($scope, $rootScope, $timeout, $location, List, Task) {
   
   $rootScope.$on('$firebaseSimpleLogin:login', function(e, user) {
     $rootScope.currentUser = user;
@@ -66,7 +66,17 @@ app.controller('ListsCtrl', function ($scope, $rootScope, $timeout, $location, L
 
   $scope.deleteList = function (listId, listPriority) {
     if ($rootScope.signedIn && listPriority >=3) {
+
       List.deleteListFromUser(listId, $scope.user);
+      $scope.tasks = Task.getUserTasks($rootScope.currentUser.id);
+
+      angular.forEach($scope.tasks, function(taskValue, taskKey) {
+        angular.forEach(taskValue.lists, function(taskListValue, taskListKey) {
+          if (taskListKey === listId) {
+            Task.deleteListFromTask(taskKey, listId, $scope.user);
+          }
+        });
+      });
     }
   };
 

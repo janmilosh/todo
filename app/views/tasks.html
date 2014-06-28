@@ -3,37 +3,27 @@
   <div class="row">
     <div class="col-xs-12">  
       <div class="form-wrapper">
-        <ng-form name="inputform" novalidate>
+        <form name="inputform" novalidate>
           <div class="form-group">
-            <input type="text" class="form-control" ng-model="task.title" placeholder="Task" required>
-            <button type="submit" class="form-control" ng-click="createTask()" ng-disabled="inputform.$invalid">Add Task</button>
+            <input type="text" class="form-control" ng-model="task.title" placeholder="Put your task title here" required>
+            <button type="submit" set-focus autofocus class="form-control" ng-click="createTask()" ng-disabled="inputform.$invalid">Create new task</button>
           </div>
-        </ng-form>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-      <div class="table-wrapper">
-        <form name="tableform">  
-          <table class="table">
-            <thead>
-              <tr>
-                <td>Tasks for {{ currentUser.email }}</td>              
-                <td class="view-col text-center">delete</td>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="display-row" ng-repeat="task in tasks | orderByPriority | orderBy:'date'">
-                <td ng-click="viewTaskDetail(task.$id)">{{ task.title }}</td>                
-                <td class="text-center delete-task hidden-xs" ng-click="deleteTask(task.$id)">x</td>
-              </tr>
-            </tbody>  
-          </table>
         </form>
+        <table class="table">
+          <thead>
+            <tr>
+              <td>Tasks for {{ currentUser.email }}</td>              
+              <td class="view-col text-center">delete</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="display-row" ng-repeat="task in tasks | orderByPriority | orderBy:'date'">
+              <td class="view-task" ng-click="viewTaskDetail(task.$id)" title="Go to Task detail">{{ task.title }}</td>                
+              <td class="text-center delete-task" ng-click="deleteTask(task.$id)">x</td>
+            </tr>
+          </tbody>  
+        </table>
       </div>
     </div>
-     
   </div>
 </div>

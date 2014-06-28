@@ -49,3 +49,12 @@ thead {
 .view-col {
   width: 60px;
 }
+
+.view-task,
+.view-list {
+  cursor: pointer;
+  &:hover {
+    background: lighten($darkBlue, 20%);
+    color: white;
+  }
+}
