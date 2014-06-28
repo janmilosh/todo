@@ -63,24 +63,30 @@ app.controller('ListsCtrl', function ($scope, $rootScope, $timeout, $location, L
     }
   };
 
-  $scope.deleteList = function (listId, listPriority) {
-    if ($rootScope.signedIn && listPriority >=3) {
+  // $scope.deleteList = function (listId, listPriority) {
+  //   if ($rootScope.signedIn && listPriority >=3) {
 
-      List.deleteListFromUser(listId, $scope.user);
-      $scope.tasks = Task.getUserTasks($rootScope.currentUser.id);
+  //     List.deleteListFromUser(listId, $scope.user);
+  //     $scope.tasks = Task.getUserTasks($rootScope.currentUser.id);
 
-      angular.forEach($scope.tasks, function(taskValue, taskKey) {
-        angular.forEach(taskValue.lists, function(taskListValue, taskListKey) {
-          if (taskListKey === listId) {
-            Task.deleteListFromTask(taskKey, listId, $scope.user);
-          }
-        });
-      });
+  //     angular.forEach($scope.tasks, function(taskValue, taskKey) {
+  //       angular.forEach(taskValue.lists, function(taskListValue, taskListKey) {
+  //         if (taskListKey === listId) {
+  //           Task.deleteListFromTask(taskKey, listId, $scope.user);
+  //         }
+  //       });
+  //     });
+  //   }
+  // };
+
+  // $scope.hideListDeleteButton = function(listPriority) {
+  //   return (listPriority <= 2);
+  // };
+
+  $scope.viewListDetail = function(listId) {
+    if ($rootScope.signedIn) {
+      $location.path('/list/' + listId);
     }
-  };
-
-  $scope.hideListDeleteButton = function(listPriority) {
-    return (listPriority <= 2);
   };
 
 });

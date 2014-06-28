@@ -13,14 +13,11 @@
           <thead>
             <tr>
               <td>Lists for {{ currentUser.email }}</td>
-              <td class="add-col">delete</td>
             </tr>
           </thead>
           <tbody>
             <tr ng-class="{'display-row': list.$priority > 2}" ng-repeat="list in lists | orderByPriority">
-              <td class="view-list">{{ list.title }}</td>
-              <td ng-show="hideListDeleteButton(list.$priority)"></td>
-              <td ng-hide="hideListDeleteButton(list.$priority)" class="text-center delete-list" ng-click="deleteList(list.$id, list.$priority)">x</td>
+              <td class="view-list" ng-click="viewListDetail(list.$id)" title="Go to Task detail">{{ list.title }}</td>
             </tr>
           </tbody>  
         </table>

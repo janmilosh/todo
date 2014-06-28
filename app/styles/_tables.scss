@@ -32,15 +32,6 @@ thead {
   color: white;
 }
 
-.delete-task,
-.delete-list {
-  cursor: pointer;
-  &:hover {
-    background: $red;
-    color: white;
-  }
-}
-
 .date-col {
   width: 100px;
 }

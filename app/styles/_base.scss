@@ -23,6 +23,22 @@ a {
   }
 }
 
+a.delete {
+  cursor: pointer;
+  padding: 5px;
+  margin-bottom: 10px;
+  background: #eee;
+  border-radius: 5px;
+  display: block;
+  float: right;
+  &:hover {
+    background: $red;
+    color: white;
+    text-decoration: none;
+  }
+}
+
+
 button.list-button.highlight {
   background: $darkBlue;
   color: white;

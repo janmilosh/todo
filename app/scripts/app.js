@@ -19,6 +19,10 @@ app.config(function ($routeProvider) {
       templateUrl: 'views/task-detail.html',
       controller: 'TaskDetailCtrl'
     })
+    .when('/list/:listId', {
+      templateUrl: 'views/list-detail.html',
+      controller: 'ListDetailCtrl'
+    })
     .when('/', {
       templateUrl: 'views/lists.html',
       controller: 'ListsCtrl'

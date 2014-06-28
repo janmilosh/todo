@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('TaskDetailCtrl', function ($scope, $rootScope, $routeParams, $location, User, Task, List) {
+app.controller('TaskDetailCtrl', function ($scope, $rootScope, $routeParams, $location, $timeout, User, Task, List) {
     
   $rootScope.$on('$firebaseSimpleLogin:login', function(e, user) {
     $rootScope.currentUser = user;
@@ -81,16 +81,39 @@ app.controller('TaskDetailCtrl', function ($scope, $rootScope, $routeParams, $lo
   };
   
   $scope.highlightLists = function() {
-    $scope.listsToHighlight = {};
+    $timeout(function() {
+      $scope.listsToHighlight = {};
+      if ($rootScope.signedIn) {
+        angular.forEach($scope.task.lists, function(taskValue, taskListId) {
+          angular.forEach($scope.lists, function(listValue, key) {
+            if (key === taskListId) {
+              $scope.listsToHighlight[key] = true;
+              return true;
+            }
+          });
+        });
+      }
+    });
+  };
+
+  $scope.deleteTask = function(taskId) {
     if ($rootScope.signedIn) {
-      angular.forEach($scope.task.lists, function(taskValue, taskListId) {
-        angular.forEach($scope.lists, function(listValue, key) {
-          if (key === taskListId) {
-            $scope.listsToHighlight[key] = true;
-            return true;
+
+      Task.deleteTaskFromUser(taskId, $scope.user);
+      $scope.lists = List.getUserLists($rootScope.currentUser.id);
+
+      angular.forEach($scope.lists, function(listValue, listKey) {
+        angular.forEach(listValue.tasks, function(listTaskValue, listTaskKey) {
+          if (listTaskKey === taskId) {
+            List.deleteTaskFromList(taskId, listKey, $scope.user);
           }
         });
       });
+
+      $location.path('/tasks');
+
+    } else {
+      console.log('There is no user signed in right now.');
     }
   };
 });

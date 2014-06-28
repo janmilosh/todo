@@ -13,6 +13,14 @@ app.factory('List', function ($firebase, FIREBASE_URL) {
       var user = users.$child(userId);
       return user.$child('lists');
     },
+    findListById: function(listId, userId) {
+      var user = users.$child(userId);
+      if (listId) {
+        return user.$child('lists').$child(listId);
+      } else {
+        return null;
+      }
+    },
     deleteListFromUser: function(listId, userId) {
       var user = users.$child(userId);
       user.$child('lists').$remove(listId);
