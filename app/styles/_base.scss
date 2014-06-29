@@ -18,15 +18,18 @@ p, a, input, td, button {
 }
 
 p {
-  margin-top: 0;
+  margin: 0 0 15px;
 }
 
 p.task-title {
   font-size: 20px;
+  line-height: 1.1;
 }
 
 p.task-description {
   font-size: 18px;
+  line-height: 1.1;
+  margin: 0;
 }
 
 h1, h2, h3 {
@@ -96,4 +99,11 @@ img.nav-pic {
   height: 30px;
   width: 30px;
   border-radius: 50%;
+}
+
+.task-detail-wrapper {
+  padding: 15px;
+  background: #f1f1f1;
+  border: 1px solid #dadada;
+  margin-bottom: 20px;
 }

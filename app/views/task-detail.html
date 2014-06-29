@@ -1,8 +1,11 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-      <p class="task-title">{{ task.title }}</p>
-      <p class="task-description">{{ task.description }}</p>
+    <div class="col-md-6 col-md-offset-3">
+      <h2 class="custom-title">Task Detail</h2>
+      <div class="task-detail-wrapper">
+        <p class="task-title">{{ task.title }}</p>
+        <p class="task-description">{{ task.description }}</p>
+      </div>      
       <div class="row">
         <div class="col-xs-12 list-button-outer">
           <div ng-repeat="list in lists | orderByPriority">
@@ -22,8 +25,13 @@
       <div ng-show="edit">
         <input type="text" class="form-control" ng-model="task.title" required ng-blur="updateTaskItem(task.$id, 'title', task.title)">
         <textarea class="form-control" ng-model="task.description" placeholder="Task description" ng-blur="updateTaskItem(task.$id, 'description', task.description)"></textarea>
-        <div class="col-xs-12">
-          <a class="delete" ng-click="deleteTask(task.$id)">Delete Task</a>          
+        <div class="row">
+          <div class="col-xs-7">
+            <p>{{ task.date | date: 'mediumDate'  }}</p>
+          </div>
+          <div class="col-xs-5">
+            <a class="delete" ng-click="deleteTask(task.$id)">Delete Task</a>          
+          </div>
         </div>
       </div>
     </div>
