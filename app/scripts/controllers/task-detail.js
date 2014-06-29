@@ -23,6 +23,8 @@ app.controller('TaskDetailCtrl', function ($scope, $rootScope, $routeParams, $lo
     $scope.highlightLists();
   });
 
+  $scope.edit = false; //for the task-detail edit area show/hide
+
   $scope.populateTaskDetails = function() {
     if ($rootScope.signedIn) {
       $scope.user = $rootScope.currentUser.id;

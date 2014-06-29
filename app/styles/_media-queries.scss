@@ -3,11 +3,8 @@
     padding: 0;
   }
 
-  .view-task,
-  .view-list {
-    &:hover {
-      background: none;
-    }
+  .display-row:hover {
+    background: none;
   }
 }
 
@@ -19,7 +16,7 @@
   only screen and (                min-resolution: 192dpi),
   only screen and (                min-resolution: 2dppx) { 
     
-  p, a, input, td, button,
+  p, a, input, td, button, button.list-button,
   .form-control, input[type="text"], textarea {
     font-size: 18px;
   }

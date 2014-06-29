@@ -22,11 +22,6 @@ table, td {
   padding: 0;
 }
 
-.input-row,
-.display-row:hover {
-  background: #eee;
-}
-
 thead {
   background: $darkBlue;
   color: white;
@@ -48,8 +43,7 @@ span.list-item {
   margin-right: 5px;
 }
 
-.view-task,
-.view-list {
+.display-row {
   cursor: pointer;
   &:hover {
     background: #eee;

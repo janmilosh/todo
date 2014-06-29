@@ -7,8 +7,8 @@
         </h2>
         <table class="table">
           <tbody>
-            <tr ng-class="{'display-row': list.$priority > 2}" ng-repeat="list in lists | orderByPriority">
-              <td class="view-list" ng-click="viewListDetail(list.$id)" title="Go to List detail">{{ list.title }}</td>
+            <tr class="display-row" ng-repeat="list in lists | orderByPriority">
+              <td ng-click="viewListDetail(list.$id)" title="Go to List detail">{{ list.title }}</td>
             </tr>
           </tbody>  
         </table>
