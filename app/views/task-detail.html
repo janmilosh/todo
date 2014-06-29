@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-sm-6 col-sm-offset-3">
-      <input type="text" class="form-control title-editor" ng-model="task.title" required ng-blur="updateTaskItem(task.$id, 'title', task.title)">
+      <input type="text" class="form-control task-editor title-editor" ng-model="task.title" required ng-blur="updateTaskItem(task.$id, 'title', task.title)">
       <textarea class="form-control" ng-model="task.description" placeholder="Task description" ng-blur="updateTaskItem(task.$id, 'description', task.description)"></textarea>
       <div class="row">
         <div class="col-xs-12 list-button-outer">
