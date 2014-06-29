@@ -60,6 +60,18 @@ app.controller('ListDetailCtrl', function ($scope, $rootScope, $routeParams, $lo
     }
   };
 
+  // This needs to be called from deleteList so that tasks don't end up without a list - get put back in inbox
+  // But it needs to be altered for the current task in the forEach
+  // $scope.toggleTaskToInbox = function() {
+  //   if ($rootScope.signedIn) {
+  //     if ($scope.task.lists) {
+  //       $scope.removeTaskFromList($routeParams.taskId, 'inbox');
+  //     } else {
+  //       $scope.addTaskToList($routeParams.taskId, 'inbox');
+  //     }
+  //   }
+  // };
+
   $scope.taskIsOnList = function(taskId) {
     var onList = false;
     angular.forEach($scope.list.tasks, function(listValue, listTaskId) {
