@@ -6,7 +6,7 @@ app.controller('AuthCtrl', function($scope, $rootScope, $location, Auth, User) {
     $scope.error = null;
     Auth.login($scope.user).then(function() {
       $scope.resetForm();
-      $location.path('/');
+      $location.path('/tasks');
     }, function(error) {
       $scope.error = error.toString();
     });

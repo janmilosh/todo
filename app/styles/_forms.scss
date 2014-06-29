@@ -42,6 +42,23 @@ textarea {
   font-size: 16px;
 }
 
+input[type="text"].title-editor {
+  font-size: 22px;
+  text-align: center;
+  border: none;
+  box-shadow: none;
+  text-transform: uppercase;
+  &:focus {
+    border: 1px solid #66AFE9;
+    outline: 0;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+  }
+}
+
+textarea.form-control {
+  margin: 20px 0;
+}
+
 input[type="submit"] {
   background: $green;
   color: white;
@@ -51,6 +68,10 @@ input[type="submit"] {
   &:hover {
     background: darken($green, 10%);
   }
+}
+
+.list-button-outer {
+  margin-bottom: 20px;
 }
 
 button.list-button {

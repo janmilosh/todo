@@ -10,6 +10,9 @@
       
       <span class="nav-right">
         <span ng-show="signedIn">
+          <li class="hidden-xs">
+            <a href="#/tasks/">{{ currentUser.email }}</a>
+          </li>
           <li>
             <a href="#" ng-click="logout()">Logout</a>
           </li>
