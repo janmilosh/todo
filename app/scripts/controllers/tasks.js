@@ -5,6 +5,7 @@ app.controller('TasksCtrl', function ($scope, $rootScope, $timeout, $location, T
   $rootScope.$on('$firebaseSimpleLogin:login', function(e, user) {
     $rootScope.currentUser = user;
     $scope.user = $rootScope.currentUser.id;
+    $scope.lists = List.getUserLists($scope.user);
     $rootScope.signedIn = true;
     $scope.populateTasks();
   });
@@ -31,6 +32,7 @@ app.controller('TasksCtrl', function ($scope, $rootScope, $timeout, $location, T
   $scope.$on('$routeChangeSuccess', function() {
     if ($rootScope.signedIn) {
       $scope.user = $rootScope.currentUser.id;
+      $scope.lists = List.getUserLists($scope.user);
       $scope.populateTasks();
     } else {
       console.log('Waiting for firebase login event to occur.');
@@ -85,4 +87,13 @@ app.controller('TasksCtrl', function ($scope, $rootScope, $timeout, $location, T
     }
   };
 
+  $scope.taskIsOnList = function(taskId, list) {
+    var onList = false;
+    angular.forEach(list.tasks, function(listValue, listTaskId) {
+      if (taskId === listTaskId) {
+        onList =  true;
+      }
+    });
+    return onList;
+  };
 });

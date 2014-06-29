@@ -16,7 +16,7 @@
           </thead>
           <tbody>
             <tr class="display-row" ng-repeat="task in tasks | orderByPriority | orderBy:'-date'">
-              <td class="view-task" ng-click="viewTaskDetail(task.$id)" title="Go to Task detail">{{ task.title }}</td>                
+              <td class="view-task" ng-click="viewTaskDetail(task.$id)" title="Go to Task detail">{{ task.title }}<br><span class="lists" ng-repeat="list in lists | orderByPriority"><span ng-if="taskIsOnList(task.$id, list)"class="list-item">{{ list.title }}</span></span></td>                
             </tr>
           </tbody>  
         </table>

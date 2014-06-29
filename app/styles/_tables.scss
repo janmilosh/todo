@@ -41,11 +41,17 @@ thead {
   width: 60px;
 }
 
+span.list-item {
+  padding: 2px 4px;
+  background: #eee;
+  font-size: 14px;
+  margin-right: 5px;
+}
+
 .view-task,
 .view-list {
   cursor: pointer;
   &:hover {
-    background: lighten($darkBlue, 20%);
-    color: white;
+    background: #eee;
   }
 }

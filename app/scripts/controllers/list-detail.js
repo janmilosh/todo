@@ -32,7 +32,7 @@ app.controller('ListDetailCtrl', function ($scope, $rootScope, $routeParams, $lo
 
   $scope.updateListItem = function(listId, key, value) {//is this in the service yet?????
     if ($rootScope.signedIn) {
-      Task.updateListItem(listId, key, value, $scope.user);
+      List.updateListItem(listId, key, value, $scope.user);
     } else {
       console.log('There is no user signed in right now.');
     }

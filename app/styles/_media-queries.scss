@@ -3,6 +3,12 @@
     padding: 0;
   }
 
+  .view-task,
+  .view-list {
+    &:hover {
+      background: none;
+    }
+  }
 }
 
 @media
@@ -18,4 +24,8 @@
     font-size: 18px;
   }
 
+  span.lists {
+    background: #eee;
+    font-size: 16px;
+  }
 }
