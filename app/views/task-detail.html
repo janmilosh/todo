@@ -8,7 +8,7 @@
       </div>      
       <div class="row">
         <div class="col-xs-12 list-button-outer">
-          <div ng-repeat="list in lists | orderByPriority">
+          <div ng-repeat="list in lists  | orderByPriority | orderBy: 'position'">
             <button class="list-button" ng-class="{highlight: listsToHighlight[list.$id]}" ng-click="addOrRemoveTaskFromList(list.$id)">{{ list.title }}</button>
           </div>
         </div>

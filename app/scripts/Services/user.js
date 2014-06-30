@@ -14,17 +14,17 @@ app.factory('User', function($firebase, FIREBASE_URL) {
           inbox: {
             title: 'Inbox',
             date: date,
-            $priority: 2
+            position: 2
           },
           today: {
             title: 'Today',
             date: date,
-            $priority: 0
+            position: 0
           },
           soon: {
             title: 'Soon',
             date: date,
-            $priority: 1
+            position: 1
           }
         }
       };

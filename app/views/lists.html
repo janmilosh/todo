@@ -7,7 +7,7 @@
         </h2>
         <table class="table">
           <tbody>
-            <tr class="display-row" ng-repeat="list in lists | orderByPriority">
+            <tr class="display-row" ng-repeat="list in lists  | orderByPriority | orderBy: 'position'">
               <td ng-click="viewListDetail(list.$id)" title="Go to List detail">{{ list.title }}</td>
             </tr>
           </tbody>  
