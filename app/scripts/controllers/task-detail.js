@@ -8,7 +8,6 @@ app.controller('TaskDetailCtrl', function ($scope, $rootScope, $routeParams, $lo
     $rootScope.signedIn = true;
     $scope.populateTaskDetails();
     $scope.populateLists();
-    $scope.highlightLists();
   });
 
   $rootScope.$on('$firebaseSimpleLogin:logout', function() {
@@ -29,6 +28,9 @@ app.controller('TaskDetailCtrl', function ($scope, $rootScope, $routeParams, $lo
     if ($rootScope.signedIn) {
       $scope.user = $rootScope.currentUser.id;
       $scope.task = Task.findTaskById($routeParams.taskId, $scope.user);
+      $scope.task.$on('loaded', function() {
+        $scope.highlightLists();
+      });
     } else {
       console.log('in the detail page, not signed in yet');
     }

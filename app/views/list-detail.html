@@ -11,6 +11,9 @@
         </form>
         <table class="table">
           <tbody>
+            <tr ng-hide="hasTasks">
+              <td>There are no tasks on this list!</td>
+            </tr>
             <tr class="display-row" ng-repeat="task in tasks | orderByPriority | orderBy:'-date'">
               <td class="view-task" ng-if="taskIsOnList(task.$id)" ng-click="viewTaskDetail(task.$id)" title="Go to Task detail">{{ task.title }}</td>                
             </tr>

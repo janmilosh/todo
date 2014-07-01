@@ -25,6 +25,9 @@ app.controller('ListDetailCtrl', function ($scope, $rootScope, $routeParams, $lo
     if ($rootScope.signedIn) {
       $scope.user = $rootScope.currentUser.id;
       $scope.list = List.findListById($routeParams.listId, $scope.user);
+      $scope.list.$on('loaded', function() {
+        $scope.hasTasks = !!$scope.list.tasks;
+      });
     } else {
       console.log('in the detail page, not signed in yet');
     }
