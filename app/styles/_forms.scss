@@ -22,10 +22,10 @@ form.ng-invalid button {
 }
 
 form.ng-valid button {  
-  background: $green;
+  background: $buttonValid;
   color: white;
   &:hover {
-    background: darken($green, 10%);
+    background: darken($buttonValid, 10%);
   }
 }
 
@@ -43,11 +43,15 @@ textarea {
 }
 
 input[type="text"].title-editor {
-  font-size: 22px;
+  font-size: 28px;
+  height: 50px;
   text-align: center;
   border: none;
+  background: none;
   box-shadow: none;
   text-transform: uppercase;
+  color: $headingColor;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
   &:focus {
     border: 1px solid #66AFE9;
     outline: 0;
@@ -61,13 +65,13 @@ textarea.form-control {
 }
 
 input[type="submit"] {
-  background: $green;
+  background: $buttonValid;
   color: white;
   border: none;
   border-radius: 5px;
   padding: 6px 10px;
   &:hover {
-    background: darken($green, 10%);
+    background: darken($buttonValid, 10%);
   }
 }
 

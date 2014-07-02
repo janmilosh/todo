@@ -11,7 +11,7 @@
         </form>
         <table class="table">
           <tbody>
-            <tr ng-hide="hasTasks">
+            <tr class="display-row" ng-hide="hasTasks">
               <td>There are no tasks on this list!</td>
             </tr>
             <tr class="display-row" ng-repeat="task in tasks | orderByPriority | orderBy:'-date'">

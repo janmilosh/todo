@@ -1,11 +1,19 @@
-$green: #3FB921;
-$darkBlue: #4444A3;
-$dustyBlue: #9193B1;
-$red: #EB3838; 
+$headingColor: #48B3A7;
+$buttonValid: #3F988F;
+$bodyBackground: #f1f1f1;
+$tableBackground: #455588;
+$navBackground: #344066;
+$tableColor: white;
+$red: #EB3838;
+$borderColor: #3F988F;
 
 .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
   padding-left: 5px;
   padding-right: 5px;
+}
+
+body {
+  background: $bodyBackground url(../images/linedpaper.png);
 }
 
 .row {
@@ -22,34 +30,39 @@ p {
 }
 
 p.task-title {
+  color: $tableColor;
   font-size: 20px;
   line-height: 1.1;
 }
 
 p.task-description {
+  color: $tableColor;
   font-size: 18px;
   line-height: 1.1;
   margin: 0;
 }
 
 h1, h2, h3 {
-  color: #555;
+  color: $headingColor;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+  text-transform: uppercase;
 }
 
 h2 {
-  font-size: 22px;
+  font-size: 30px;
   line-height: 1;
   margin: 10px 0 20px;
   text-align: center;
   font-weight: normal;
   text-transform: uppercase;
+  letter-spacing: 3px;
 }
 
 a {
-  color: $darkBlue;
+  color: darken($borderColor, 5%);
   cursor: pointer;
   &:hover {
-    color: $darkBlue;
+    color: darken($borderColor, 5%);
     text-decoration: underline;
   }
 }
@@ -73,7 +86,7 @@ a.delete {
 }
 
 button.list-button.highlight {
-  background: $darkBlue;
+  background: $tableBackground;
   color: white;
 }
 
@@ -103,7 +116,7 @@ img.nav-pic {
 
 .task-detail-wrapper {
   padding: 15px;
-  background: #f8f8f8;
-  border: 1px solid #ddd;
+  background: lighten($tableBackground, 3%);
+  border: 1px solid darken($tableBackground, 10%);
   margin-bottom: 20px;
 }

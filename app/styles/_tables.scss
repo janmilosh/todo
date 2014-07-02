@@ -7,6 +7,7 @@
   vertical-align: middle;
   padding: 6px 8px;
   font-size: 18px;
+  border-top: 1px solid $borderColor;
 }
 
 table input[type="text"],
@@ -15,16 +16,11 @@ table textarea {
 }
 
 table, td {
-  border: 1px solid #DDD;
+  border: 1px solid $borderColor;
 }
 
 .table > tbody > tr > td.create {
   padding: 0;
-}
-
-thead {
-  background: $darkBlue;
-  color: white;
 }
 
 .date-col {
@@ -38,14 +34,16 @@ thead {
 
 span.list-item {
   padding: 2px 4px;
-  background: #eee;
+  background: lighten($tableBackground, 3%);
   font-size: 15px;
   margin-right: 5px;
 }
 
 .display-row {
+  background: $tableBackground;
+  color: $tableColor;
   cursor: pointer;
   &:hover {
-    background: #eee;
+    background: darken($tableBackground, 3%);
   }
 }
