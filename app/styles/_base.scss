@@ -13,7 +13,7 @@ $borderColor: #3F988F;
 }
 
 body {
-  background: $bodyBackground url(../images/linedpaper.png);
+  background: $bodyBackground url(../backgrounds/linedpaper.png);
 }
 
 .row {
@@ -86,7 +86,7 @@ a.delete {
 }
 
 button.list-button.highlight {
-  background: $tableBackground;
+  background: lighten($tableBackground, 10%);
   color: white;
 }
 
