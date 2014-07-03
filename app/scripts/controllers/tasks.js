@@ -87,6 +87,12 @@ app.controller('TasksCtrl', function ($scope, $rootScope, $timeout, $location, T
     }
   };
 
+  $scope.viewList = function(listId) {
+    if ($rootScope.signedIn) {
+      $location.path('/list/' + listId);
+    }
+  }
+
   $scope.taskIsOnList = function(taskId, list) {
     var onList = false;
     angular.forEach(list.tasks, function(listValue, listTaskId) {

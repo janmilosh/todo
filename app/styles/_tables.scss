@@ -32,18 +32,23 @@ table, td {
   width: 60px;
 }
 
-span.list-item {
+button.list-item {
+  white-space: nowrap;
   padding: 2px 4px;
   background: lighten($tableBackground, 10%);
   font-size: 15px;
-  margin-right: 5px;
+  margin: 2px 0;
+  border: none;
+  &:active {
+    outline: none;
+  }
 }
 
 .display-row {
   background: $tableBackground;
   color: $tableColor;
   cursor: pointer;
-  &:hover {
+  td.task-title:hover {
     background: darken($tableBackground, 3%);
   }
 }
