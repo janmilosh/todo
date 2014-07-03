@@ -4,9 +4,20 @@
   margin: 0 auto 20px;
 }
 
+.task-edit-wrapper {
+  background: #dadada;
+  padding: 15px 15px 5px;
+}
+
 .form-control {
   margin-bottom: 8px;
   font-size: 16px;
+}
+
+.form-control[disabled] {
+  background: none;
+  border: 1px solid $buttonValid;
+  color: darken($borderColor, 5%);
 }
 
 form button {
@@ -36,10 +47,10 @@ form.ng-valid button {
   }
 }
 
-input[type="text"],
-textarea {
+input[type="text"] {
   width: 100%;
   font-size: 16px;
+  border: 1px solid $borderColor;
 }
 
 input[type="text"].title-editor {
@@ -61,6 +72,7 @@ input[type="text"].title-editor {
 
 
 textarea.form-control {
+  border: 1px solid $borderColor;
   margin: 0 0 20px;
 }
 
@@ -76,14 +88,14 @@ input[type="submit"] {
 }
 
 .list-button-outer {
-  margin: 5px 0 15px;
+  margin: 28px 0 0;
 }
 
 button.list-button {
   border-radius: 5px;
-  border: 1px solid #ccc;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  background: #eee;
+  border: 1px solid lighten($tableBackground, 25%);
+  background: lighten($tableBackground, 3%);
+  color: lighten($tableBackground, 25%);
   padding: 2px 5px;
   font-size: 16px;
   float: left;
@@ -92,6 +104,13 @@ button.list-button {
     outline: none;
   }
 }
+
+button.list-button.highlight {
+  background: lighten($buttonValid, 10%);
+  border: 1px solid darken($buttonValid, 15%);
+  color: white;
+}
+
 
 button.form-control {
   height: auto;

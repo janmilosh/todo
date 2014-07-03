@@ -5,14 +5,15 @@
       <div class="task-detail-wrapper">
         <p class="task-title">{{ task.title }}</p>
         <p class="task-description">{{ task.description }}</p>
-      </div>      
-      <div class="row">
-        <div class="col-xs-12 list-button-outer">
-          <div ng-repeat="list in lists  | orderByPriority | orderBy: 'position'">
-            <button class="list-button" ng-class="{highlight: listsToHighlight[list.$id]}" ng-click="addOrRemoveTaskFromList(list.$id)">{{ list.title }}</button>
+        <div class="row">
+          <div class="col-xs-12 list-button-outer">
+            <div ng-repeat="list in lists  | orderByPriority | orderBy: 'position'">
+              <button class="list-button" ng-class="{highlight: listsToHighlight[list.$id]}" ng-click="addOrRemoveTaskFromList(list.$id)">{{ list.title }}</button>
+            </div>
           </div>
         </div>
       </div>
+
       <div class="row edit-links">
         <div class="col-xs-6">
           <a href="#/tasks/" class="back-link">Back to Tasks</a>
@@ -22,7 +23,7 @@
           <a ng-show="edit" ng-click="edit=false">Close</a>          
         </div>
       </div>
-      <div ng-show="edit">
+      <div class="task-edit-wrapper" ng-show="edit">
         <input type="text" class="form-control" ng-model="task.title" required ng-blur="updateTaskItem(task.$id, 'title', task.title)">
         <textarea class="form-control" ng-model="task.description" placeholder="Task description" ng-blur="updateTaskItem(task.$id, 'description', task.description)"></textarea>
         <div class="row">
