@@ -4,8 +4,8 @@
       <div class="auth-forms">
         <h2>Log In</h2>       
         <form ng-submit="login()">
-          <input type="email" ng-model="user.email" placeholder="Email" class="form-control" required>
-          <input type="password" ng-model="user.password" placeholder="Password" class="form-control" required>
+          <input type="email" ng-model="user.email" placeholder="Email" class="form-control add-new" required>
+          <input type="password" ng-model="user.password" placeholder="Password" class="form-control add-new" required>
           <p ng-show="error" class="text-danger">{{ error }}</p>
           <input type="submit" value="Log in">&nbsp;&nbsp;<a href="#/register">Register</a>
         </form>

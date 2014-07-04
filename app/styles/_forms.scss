@@ -52,7 +52,9 @@ form.ng-valid button {
   }
 }
 
-input[type="text"] {
+input[type="text"],
+input[type="password"],
+input[type="email"] {
   width: 100%;
   font-size: 16px;
   border: 1px solid lighten($borderColor, 15%);
@@ -75,7 +77,9 @@ input[type="text"].title-editor {
   }
 }
 
-input[type="text"].add-new {
+input[type="text"].add-new,
+input[type="email"].add-new,
+input[type="password"].add-new {
   background: none;
 }
 
