@@ -37,7 +37,7 @@ button.list-item {
   padding: 2px 4px;
   background: lighten($tableBackground, 10%);
   font-size: 15px;
-  margin: 2px 0;
+  margin: 0 4px 2px 0;
   border: none;
   &:active {
     outline: none;
