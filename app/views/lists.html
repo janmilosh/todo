@@ -15,7 +15,7 @@
         <form name="inputform" novalidate>
           <div class="row">
             <div class="col-xs-9">
-              <input type="text" class="form-control" ng-model="list.title" placeholder="Put your list title here" required>
+              <input type="text" class="form-control add-new" ng-model="list.title" placeholder="Put your list title here" required>
             </div>
             <div class="col-xs-3">
               <button set-focus type="submit" class="form-control" ng-click="createList()" ng-disabled="inputform.$invalid">Add</button>

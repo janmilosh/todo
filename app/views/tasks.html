@@ -6,7 +6,7 @@
         <form name="inputform" novalidate>
           <div class="row">
             <div class="col-xs-9">
-              <input type="text" class="form-control new-task" ng-model="task.title" placeholder="New task title" required>
+              <input type="text" class="form-control add-new" ng-model="task.title" placeholder="New task title" required>
             </div>
             <div class="col-xs-3">
               <button type="submit" set-focus class="form-control" ng-click="createTask()" ng-disabled="inputform.$invalid">add</button>
