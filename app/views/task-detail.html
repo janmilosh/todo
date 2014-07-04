@@ -27,10 +27,10 @@
         <input type="text" class="form-control" ng-model="task.title" required ng-blur="updateTaskItem(task.$id, 'title', task.title)">
         <textarea class="form-control" ng-model="task.description" placeholder="Task description" ng-blur="updateTaskItem(task.$id, 'description', task.description)"></textarea>
         <div class="row">
-          <div class="col-xs-7">
+          <div class="col-xs-6">
             <p>{{ task.date | date: 'mediumDate'  }}</p>
           </div>
-          <div class="col-xs-5">
+          <div class="col-xs-6">
             <a class="delete" ng-click="deleteTask(task.$id)">Delete Task</a>          
           </div>
         </div>
