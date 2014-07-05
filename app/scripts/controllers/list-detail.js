@@ -59,7 +59,7 @@ app.controller('ListDetailCtrl', function ($scope, $rootScope, $routeParams, $lo
           }
         });
       });
-      $location.path('/lists');
+      $location.path('/lists/');
     }
   };
 

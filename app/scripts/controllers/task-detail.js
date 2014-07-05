@@ -13,7 +13,7 @@ app.controller('TaskDetailCtrl', function ($scope, $rootScope, $routeParams, $lo
   $rootScope.$on('$firebaseSimpleLogin:logout', function() {
     $rootScope.signedIn = false;
     delete $rootScope.currentUser;
-    $location.path('/login');
+    $location.path('/login/');
   });
 
   $scope.$on('$routeChangeSuccess', function() {
@@ -125,7 +125,7 @@ app.controller('TaskDetailCtrl', function ($scope, $rootScope, $routeParams, $lo
         });
       });
 
-      $location.path('/');
+      $location.path('/lists/');
 
     } else {
       console.log('There is no user signed in right now.');

@@ -10,13 +10,13 @@ app.controller('NavCtrl', function($scope, $rootScope, $location, Auth) {
   $rootScope.$on('$firebaseSimpleLogin:logout', function() {
     $rootScope.signedIn = false;
     $rootScope.currentUser = null;
-    $location.path('/login');
+    $location.path('/login/');
   });
 
   $scope.logout = function() {
     Auth.logout();
     $rootScope.currentUser = null;
-    $location.path('/login');
+    $location.path('/login/');
   };
 
 });

@@ -13,7 +13,7 @@ app.controller('TasksCtrl', function ($scope, $rootScope, $timeout, $location, T
   $rootScope.$on('$firebaseSimpleLogin:logout', function() {
     $rootScope.signedIn = false;
     delete $rootScope.currentUser;
-    $location.path('/login');
+    $location.path('/login/');
   });
 
   $scope.now = Date.now();
@@ -91,7 +91,7 @@ app.controller('TasksCtrl', function ($scope, $rootScope, $timeout, $location, T
     if ($rootScope.signedIn) {
       $location.path('/list/' + listId);
     }
-  }
+  };
 
   $scope.taskIsOnList = function(taskId, list) {
     var onList = false;

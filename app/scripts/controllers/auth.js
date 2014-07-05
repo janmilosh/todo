@@ -11,15 +11,15 @@ app.controller('AuthCtrl', function($scope, $rootScope, $location, Auth, User) {
 
   $scope.$on('$routeChangeSuccess', function() {
     if ($rootScope.signedIn) {
-        $location.path('/');
-      }
+      $location.path('/');
+    }
   });
 
   $scope.login = function() {
     $scope.error = null;
     Auth.login($scope.user).then(function() {
       $scope.resetForm();
-      $location.path('/tasks/');
+      $location.path('/');
     }, function(error) {
       $scope.error = error.toString();
     });

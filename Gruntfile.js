@@ -280,7 +280,7 @@ module.exports = function (grunt) {
             '.htaccess',
             '*.html',
             'contact.php',
-            'backgrounds/*',            
+            'backgrounds/*',
             'views/{,*/}*.html',
             'bower_components/**/*',
             'images/{,*/}*.{webp}',
