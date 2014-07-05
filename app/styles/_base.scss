@@ -14,6 +14,7 @@ $borderColor: #3F988F;
 
 body {
   background: $bodyBackground url(../backgrounds/linedpaper.png);
+  padding-bottom: 72px;
 }
 
 .row {
@@ -56,6 +57,17 @@ h2 {
   font-weight: normal;
   text-transform: uppercase;
   letter-spacing: 3px;
+}
+
+dt {
+  font-size: 18px;
+  font-weight: 600;
+  color: $navBackground;
+}
+
+dd {
+  font-size: 16px;
+  margin-bottom: 15px;
 }
 
 a {

@@ -3,6 +3,14 @@
     padding: 0;
   }
 
+  .footer-nav {
+    position: relative;
+  }
+
+  body {
+    padding-bottom: 0;
+  }
+
   .display-row:hover {
     background: $tableBackground;
   }

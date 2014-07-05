@@ -2,11 +2,24 @@
  
 app.controller('AuthCtrl', function($scope, $rootScope, $location, Auth, User) {
 
+  $rootScope.$on('$firebaseSimpleLogin:login', function(e, user) {
+    $rootScope.currentUser = user;
+    $scope.user = $rootScope.currentUser.id;
+    $rootScope.signedIn = true;
+    $location.path('/');
+  });
+
+  $scope.$on('$routeChangeSuccess', function() {
+    if ($rootScope.signedIn) {
+        $location.path('/');
+      }
+  });
+
   $scope.login = function() {
     $scope.error = null;
     Auth.login($scope.user).then(function() {
       $scope.resetForm();
-      $location.path('/tasks');
+      $location.path('/tasks/');
     }, function(error) {
       $scope.error = error.toString();
     });

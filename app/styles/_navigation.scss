@@ -33,6 +33,35 @@
   }
 }
 
+.footer-nav {
+  height: 52px;
+  width: 100%;
+  background: #dadada;
+  position: fixed;
+  bottom: 0;
+  padding: 0 15px;
+  text-align: center;
+  ul {    
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    display: block;
+    li {
+      display: inline;
+      a {
+        display: inline-block;
+        padding: 12px 15px;
+        color: $navBackground;
+        font-size: 18px;
+        &:hover {
+          color: lighten($navBackground, 5%);
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}
+
 .header {
   p {
     float: right;

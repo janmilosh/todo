@@ -125,7 +125,7 @@ app.controller('TaskDetailCtrl', function ($scope, $rootScope, $routeParams, $lo
         });
       });
 
-      $location.path('/tasks');
+      $location.path('/');
 
     } else {
       console.log('There is no user signed in right now.');
