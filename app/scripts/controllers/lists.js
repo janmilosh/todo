@@ -12,7 +12,7 @@ app.controller('ListsCtrl', function ($scope, $rootScope, $timeout, $location, L
   $rootScope.$on('$firebaseSimpleLogin:logout', function() {
     $rootScope.signedIn = false;
     delete $rootScope.currentUser;
-    $location.path('/login/');
+    $location.path('/');
   });
 
   $scope.now = Date.now();

@@ -13,7 +13,7 @@ app.controller('ListDetailCtrl', function ($scope, $rootScope, $routeParams, $lo
   $rootScope.$on('$firebaseSimpleLogin:logout', function() {
     $rootScope.signedIn = false;
     delete $rootScope.currentUser;
-    $location.path('/login');
+    $location.path('/');
   });
 
   $scope.$on('$routeChangeSuccess', function() {

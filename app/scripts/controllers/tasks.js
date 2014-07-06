@@ -13,7 +13,7 @@ app.controller('TasksCtrl', function ($scope, $rootScope, $timeout, $location, T
   $rootScope.$on('$firebaseSimpleLogin:logout', function() {
     $rootScope.signedIn = false;
     delete $rootScope.currentUser;
-    $location.path('/login/');
+    $location.path('/');
   });
 
   $scope.now = Date.now();
