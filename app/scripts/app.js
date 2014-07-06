@@ -44,4 +44,9 @@ app.config(function ($routeProvider) {
     .otherwise({
       redirectTo: '/'
     });
+})
+.run(function ($window, $rootScope) {
+  $rootScope.$on('$routeChangeSuccess', function () {
+    $window.scrollTo(0,0);
+  });
 });
