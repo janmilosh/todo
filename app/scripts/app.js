@@ -9,7 +9,10 @@ var app = angular.module('todoApp', [
   ])
   .constant('FIREBASE_URL', 'https://milosh-todo.firebaseio.com/');
 
-app.config(function ($routeProvider) {
+app.config(function ($routeProvider, $locationProvider) {
+  
+  $locationProvider.html5Mode(false).hashPrefix('!');
+
   $routeProvider
     .when('/', {
       templateUrl: 'views/info.html',
