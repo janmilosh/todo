@@ -278,6 +278,7 @@ module.exports = function (grunt) {
           src: [
             '*.{ico,png,txt}',
             '.htaccess',
+            'google20bce75e65feefc5.html',
             '*.html',
             'contact.php',
             'backgrounds/*',
