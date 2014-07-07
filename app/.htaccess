@@ -551,7 +551,7 @@ FileETag None
 # ------------------------------------------------------------------------------
  
 <IfModule mod_headers.c>
-    #RequestHeader set X-Prerender-Token "dBxSXUg7T8xhy0ivnQs6"
+    RequestHeader set X-Prerender-Token "dBxSXUg7T8xhy0ivnQs6"
 </IfModule>
  
 <IfModule mod_rewrite.c>
