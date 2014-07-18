@@ -25,6 +25,9 @@
       float: left;
       text-align: left;
       text-transform: uppercase;
+      .site-title {
+        text-transform: none;
+      }
     }
     .nav-right {
       float: right;

@@ -3,6 +3,13 @@
     padding: 0;
   }
 
+  .top-nav.signed-in ul  {
+    text-align: center;
+    .nav-left {    
+      float: none;
+    }
+  }
+
   .footer-nav {
     position: relative;
   }

@@ -26,8 +26,15 @@ app.factory('Auth', function($firebaseSimpleLogin, FIREBASE_URL, $rootScope, $lo
       $location.path('/login');
     },
     resetPassword: function(email) {
-      console.log('auth', auth)
       return auth.$sendPasswordResetEmail(email);
+    },
+    changePassword: function(user) {
+      if(user.password === user.passwordConfirmation) {
+        $rootScope.passwordMissmatch = false;
+        return auth.$changePassword(user.email, user.oldPassword, user.password);
+      } else {
+        $rootScope.passwordMissmatch = true;
+      }
     }
   };
 

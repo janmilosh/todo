@@ -2,14 +2,15 @@
   <div class="row">
     <div class="col-sm-5 col-md-4 center-block">
       <div class="auth-forms">
-        <h2>Register</h2>
-        <form ng-submit="register()">
-          <input type="email" ng-model="user.email" placeholder="Email" class="form-control add-new" required>
-          <input type="password" ng-model="user.password" placeholder="Password" class="form-control add-new" required>
+        <h2 class="change-password">Change Password</h2>
+        <form ng-submit="newPassword()">
+          <input type="password" ng-model="user.oldPassword" placeholder="Old password" class="form-control add-new" required>
+          <input type="password" ng-model="user.password" placeholder="New password" class="form-control add-new" required>
           <input type="password" ng-model="user.passwordConfirmation" placeholder="Confirm Password" class="form-control add-new" required>
           <p ng-show="passwordMissmatch" class="text-danger">Your passwords don't match, please try again.</p>
           <p ng-show="error" class="text-danger">{{ error }}</p>
-          <input type="submit" value="Register">
+          <input type="submit" value="Change password">
+          <p>{{ message }}</p>
         </form>
       </div>
     </div>

@@ -15,7 +15,7 @@ app.config(function ($routeProvider, $locationProvider) {
 
   $routeProvider
     .when('/', {
-      templateUrl: 'views/info.html',
+      templateUrl: 'views/about.html'
     })
     .when('/tasks', {
       templateUrl: 'views/tasks.html',
@@ -41,8 +41,12 @@ app.config(function ($routeProvider, $locationProvider) {
       templateUrl: 'views/login.html',
       controller: 'AuthCtrl'
     })
-    .when('/info', {
-      templateUrl: 'views/info.html',
+    .when('/account', {
+      templateUrl: 'views/account.html',
+      controller: 'AuthCtrl'
+    })
+    .when('/about', {
+      templateUrl: 'views/about.html'
     })
     .otherwise({
       redirectTo: '/'

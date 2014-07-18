@@ -4,31 +4,44 @@ app.controller('AuthCtrl', function($scope, $rootScope, $location, Auth, User) {
 
   $rootScope.$on('$firebaseSimpleLogin:login', function(e, user) {
     $rootScope.currentUser = user;
-    $scope.user = $rootScope.currentUser.id;
+    $scope.user = $rootScope.currentUser;
     $rootScope.signedIn = true;
-    $location.path('/');
   });
 
   $scope.$on('$routeChangeSuccess', function() {
     if ($rootScope.signedIn) {
-      $location.path('/');
+      $scope.user = $rootScope.currentUser;
+    } else {
+      console.log('Waiting for firebase login event to occur.');
     }
   });
 
   $scope.sendResetPasswordEmail = function() {
-    $scope.resetError = null;
+    $scope.error = null;
+    $scope.message = null;
     Auth.resetPassword($scope.resetEmail).then(function() {
       $scope.reset = false;
-      $scope.resetMessage = 'Please check your email for your new temporary password.';
+      $scope.message = 'Please check your email for your new temporary password.';
     }, function(error) {
-      $scope.resetError = error.toString();
+      $scope.error = error.toString();
       $scope.resetMessage = null;
+    });
+  };
+
+  $scope.newPassword = function() {
+    $scope.error = null;
+    $scope.message = null;
+    Auth.changePassword($scope.user).then(function() {
+      $scope.message = 'Your password has been changed.';
+      $scope.resetForm();
+    }, function(error) {
+      $scope.passwordError = error.toString();
     });
   };
 
   $scope.showResetInput = function() {
     $scope.reset = true;
-  }
+  };
 
   $scope.login = function() {
     $scope.resetMessage = null;
@@ -54,7 +67,7 @@ app.controller('AuthCtrl', function($scope, $rootScope, $location, Auth, User) {
   };
 
   $scope.resetForm = function() {
-    $scope.user = { email: '', password: '', passwordConfirmation: '' };
+    $scope.user = { email: '', password: '', passwordConfirmation: '', oldPassword: '' };
   };
 
 });
