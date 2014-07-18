@@ -15,7 +15,23 @@ app.controller('AuthCtrl', function($scope, $rootScope, $location, Auth, User) {
     }
   });
 
+  $scope.sendResetPasswordEmail = function() {
+    $scope.resetError = null;
+    Auth.resetPassword($scope.resetEmail).then(function() {
+      $scope.reset = false;
+      $scope.resetMessage = 'Please check your email for your new temporary password.';
+    }, function(error) {
+      $scope.resetError = error.toString();
+      $scope.resetMessage = null;
+    });
+  };
+
+  $scope.showResetInput = function() {
+    $scope.reset = true;
+  }
+
   $scope.login = function() {
+    $scope.resetMessage = null;
     $scope.error = null;
     Auth.login($scope.user).then(function() {
       $scope.resetForm();

@@ -24,6 +24,10 @@ app.factory('Auth', function($firebaseSimpleLogin, FIREBASE_URL, $rootScope, $lo
       $rootScope.signedIn = false;
       delete $rootScope.currentUser;
       $location.path('/login');
+    },
+    resetPassword: function(email) {
+      console.log('auth', auth)
+      return auth.$sendPasswordResetEmail(email);
     }
   };
 
