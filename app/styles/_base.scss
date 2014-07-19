@@ -27,7 +27,7 @@ p, a, input, td, button {
 }
 
 p {
-  margin: 5px 0 15px;
+  margin: 8px 0 15px;
 }
 
 p.task-title {
@@ -41,6 +41,10 @@ p.task-description {
   font-size: 18px;
   line-height: 1.1;
   margin: 0;
+}
+
+p.text-danger {
+  color: $red;
 }
 
 h1, h2, h3 {

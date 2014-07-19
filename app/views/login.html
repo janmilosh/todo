@@ -12,10 +12,10 @@
         <p ng-click="showResetInput()"><a>Forgot your password?</a></p>
         <form ng-show="reset" ng-submit="sendResetPasswordEmail()">
           <input type="email" ng-model="resetEmail" placeholder="Email" class="form-control add-new" required>
-          <p class="text-danger">{{ error }}</p>
+          <p class="text-danger">{{ resetPasswordError }}</p>
           <input type="submit" value="Get password">
-          <p>{{ message }}</p>
-        </form>        
+        </form> 
+        <p>{{ message }}</p>       
       </div>
     </div> 
   </div>

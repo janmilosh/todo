@@ -17,14 +17,14 @@ app.controller('AuthCtrl', function($scope, $rootScope, $location, Auth, User) {
   });
 
   $scope.sendResetPasswordEmail = function() {
-    $scope.error = null;
+    $scope.resetPasswordError = null;
     $scope.message = null;
     Auth.resetPassword($scope.resetEmail).then(function() {
       $scope.reset = false;
       $scope.message = 'Please check your email for your new temporary password.';
     }, function(error) {
-      $scope.error = error.toString();
-      $scope.resetMessage = null;
+      $scope.resetPasswordError = error.toString();
+      $scope.message = null;
     });
   };
 
@@ -35,7 +35,8 @@ app.controller('AuthCtrl', function($scope, $rootScope, $location, Auth, User) {
       $scope.message = 'Your password has been changed.';
       $scope.resetForm();
     }, function(error) {
-      $scope.passwordError = error.toString();
+      console.log('newPassword controller error', error);
+      $scope.error = error.toString();
     });
   };
 
@@ -44,7 +45,7 @@ app.controller('AuthCtrl', function($scope, $rootScope, $location, Auth, User) {
   };
 
   $scope.login = function() {
-    $scope.resetMessage = null;
+    $scope.message = null;
     $scope.error = null;
     Auth.login($scope.user).then(function() {
       $scope.resetForm();
