@@ -4,7 +4,7 @@ app.controller('ListDetailCtrl', function ($scope, $rootScope, $routeParams, $lo
     
   $rootScope.$on('$firebaseSimpleLogin:login', function(e, user) {
     $rootScope.currentUser = user;
-    $scope.user = $rootScope.currentUser.id;
+    $scope.user = user;
     $rootScope.signedIn = true;
     $scope.populateListDetails();
     $scope.populateTasks();
@@ -23,8 +23,8 @@ app.controller('ListDetailCtrl', function ($scope, $rootScope, $routeParams, $lo
 
   $scope.populateListDetails = function() {
     if ($rootScope.signedIn) {
-      $scope.user = $rootScope.currentUser.id;
-      $scope.list = List.findListById($routeParams.listId, $scope.user);
+      $scope.user = $rootScope.currentUser;
+      $scope.list = List.findListById($routeParams.listId, $scope.user.id);
       $scope.list.$on('loaded', function() {
         $scope.hasTasks = !!$scope.list.tasks;
       });
@@ -35,7 +35,7 @@ app.controller('ListDetailCtrl', function ($scope, $rootScope, $routeParams, $lo
 
   $scope.updateListItem = function(listId, key, value) {//is this in the service yet?????
     if ($rootScope.signedIn) {
-      List.updateListItem(listId, key, value, $scope.user);
+      List.updateListItem(listId, key, value, $scope.user.id);
     } else {
       console.log('There is no user signed in right now.');
     }
@@ -49,31 +49,31 @@ app.controller('ListDetailCtrl', function ($scope, $rootScope, $routeParams, $lo
   $scope.deleteList = function (listId) {
     if ($rootScope.signedIn) {
 
-      List.deleteListFromUser(listId, $scope.user);
-      $scope.tasks = Task.getUserTasks($rootScope.currentUser.id);
-
-      angular.forEach($scope.tasks, function(taskValue, taskKey) {
-        angular.forEach(taskValue.lists, function(taskListValue, taskListKey) {
-          if (taskListKey === listId) {
-            Task.deleteListFromTask(taskKey, listId, $scope.user);
+      List.deleteListFromUser(listId, $scope.user.id);
+      $scope.tasks = Task.getUserTasks($scope.user.id);
+      
+      angular.forEach($scope.tasks, function(taskValue, taskKey) { //loop through the tasks
+        var count = 0; //initialize to zero lists to start
+        var onList = false; //initialize to task not on list
+        
+        angular.forEach(taskValue.lists, function(taskListValue, taskListKey) { //loop through task lists
+          if (taskListKey === listId) { //take this list off the task if it's there
+            Task.deleteListFromTask(taskKey, listId, $scope.user.id);
+            onList = true; //task is on the deleted list
           }
+
+          count += 1; //counts the number of lists the task is on
         });
+
+        if (count === 1 && onList) { //if the task was on only one list and on the deleted list
+          //add task to inbox and add inbox to task
+          List.addTaskToList(taskKey, 'inbox', $scope.user.id);
+          Task.addListToTask(taskKey, 'inbox', $scope.user.id);
+        }
       });
       $location.path('/lists/');
     }
   };
-
-  // This needs to be called from deleteList so that tasks don't end up without a list - get put back in inbox
-  // But it needs to be altered for the current task in the forEach
-  // $scope.toggleTaskToInbox = function() {
-  //   if ($rootScope.signedIn) {
-  //     if ($scope.task.lists) {
-  //       $scope.removeTaskFromList($routeParams.taskId, 'inbox');
-  //     } else {
-  //       $scope.addTaskToList($routeParams.taskId, 'inbox');
-  //     }
-  //   }
-  // };
 
   $scope.taskIsOnList = function(taskId) {
     var onList = false;
@@ -87,7 +87,7 @@ app.controller('ListDetailCtrl', function ($scope, $rootScope, $routeParams, $lo
 
   $scope.populateTasks = function() {
     if ($rootScope.signedIn) {
-      $scope.tasks = Task.getUserTasks($rootScope.currentUser.id);
+      $scope.tasks = Task.getUserTasks($scope.user.id);
     }
   };
 
