@@ -28,9 +28,11 @@ app.controller('TaskDetailCtrl', function ($scope, $rootScope, $routeParams, $lo
     if ($rootScope.signedIn) {
       $scope.user = $rootScope.currentUser.id;
       $scope.task = Task.findTaskById($routeParams.taskId, $scope.user);
-      $scope.task.$on('loaded', function() {
-        $scope.highlightLists();
-      });
+      if ($scope.task) { //if there are any tasks
+        $scope.task.$on('loaded', function() {
+          $scope.highlightLists();
+        });
+      }
     } else {
       console.log('in the detail page, not signed in yet');
     }
