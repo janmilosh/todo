@@ -41,6 +41,7 @@ app.controller('ListDetailCtrl', function ($scope, $rootScope, $routeParams, $lo
         };
         var taskId = returnObject.path.n[3]; //thought the actual id was to be returned, but instead
         $scope.addTaskToToday(taskId);        //some kind of crazy object that contains the path
+        $scope.hasTasks = true;
       });
       
     } else {
