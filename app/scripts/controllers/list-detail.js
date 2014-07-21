@@ -21,6 +21,40 @@ app.controller('ListDetailCtrl', function ($scope, $rootScope, $routeParams, $lo
     $scope.populateTasks();
   });
 
+  $scope.task = {
+    title: '',
+    date: '',
+    description: ''
+  };
+
+  $scope.createTodayTask = function() {
+    if ($rootScope.signedIn) {
+
+      $scope.task.date = Date.now();
+      
+      Task.addTaskToUser($scope.task, $scope.user.id).then(function(returnObject) {
+        $scope.populateTasks();
+        $scope.task = {                 //resets the task to empty values
+          title: '',
+          date: '',
+          description: ''
+        };
+        var taskId = returnObject.path.n[3]; //thought the actual id was to be returned, but instead
+        $scope.addTaskToToday(taskId);        //some kind of crazy object that contains the path
+      });
+      
+    } else {
+      console.log('There is no user signed in right now.');
+    }
+  };
+
+  $scope.addTaskToToday = function(taskId) {
+    if ($rootScope.signedIn) {
+      List.addTaskToList(taskId, 'today', $scope.user.id);
+      Task.addListToTask(taskId, 'today', $scope.user.id);
+    }
+  };
+
   $scope.populateListDetails = function() {
     if ($rootScope.signedIn) {
       $scope.user = $rootScope.currentUser;
@@ -46,6 +80,11 @@ app.controller('ListDetailCtrl', function ($scope, $rootScope, $routeParams, $lo
   $scope.customList = function() {
     var listName = $routeParams.listId;
     return (listName === 'inbox' || listName === 'today' || listName === 'soon');
+  };
+
+  $scope.todayList = function() {
+    var listName = $routeParams.listId;
+    return (listName === 'today');
   };
 
   $scope.deleteList = function (listId) {

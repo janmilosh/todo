@@ -9,6 +9,16 @@
             <input type="text" ng-hide="customList()" class="form-control title-editor" ng-model="list.title" ng-blur="updateListItem(list.$id, 'title', list.title)" required>
           </div>
         </form>
+        <form name="taskInputform" novalidate ng-if="todayList()">
+          <div class="row">
+            <div class="col-xs-9">
+              <input type="text" class="form-control add-new" ng-model="task.title" placeholder="Add task to today" required>
+            </div>
+            <div class="col-xs-3">
+              <button type="submit" set-focus class="form-control" ng-click="createTodayTask()" ng-disabled="taskInputform.$invalid">add</button>
+            </div>
+          </div>
+        </form>
         <table class="table">
           <tbody>
             <tr class="display-row" ng-hide="hasTasks">
